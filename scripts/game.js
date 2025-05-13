@@ -1,6 +1,5 @@
 let canvas;
 let ctx;
-
 let world = new World();
 
 function init(){
