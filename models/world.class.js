@@ -9,6 +9,9 @@ class World {
     clouds = [
         new Cloud()
     ];
+    backgroundObjects = [
+        new BackgroundObject('img/5_background/layers/1_first_layer/1.png')
+    ];
     canvas;
     ctx;
 
@@ -21,24 +24,28 @@ class World {
     draw(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        for(let i = 0; i < this.clouds.length; i++){
-            this.ctx.drawImage(this.clouds[i].img, this.clouds[i].x, this.clouds[i].y, this.clouds[i].width, this.clouds[i].height);
-        }
-
-        this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
+        this.addArrayToCanvas(this.backgroundObjects); //Hintergrund
+        this.addArrayToCanvas(this.clouds); //Wolken
+        this.addToCanvas(this.character); //main character 
+        this.addArrayToCanvas(this.enemies); //Hühnchen
         
-        for(let i = 0; i < this.enemies.length; i++){
-            this.ctx.drawImage(this.enemies[i].img, this.enemies[i].x, this.enemies[i].y, this.enemies[i].width, this.enemies[i].height);
-        }
-
-        // alternativ über eine forEach-Schleife: 
-        // enemies.forEach(enemy => {
-        //      this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height)    
-        // })
-
         let self = this;
         requestAnimationFrame(function() { //requestAnimationFrame benötigt eine (anonyme) Funktion, Ausführung erfolgt, sobald alles oberhalb abgeschlossen ist (async?)
             self.draw(); //this ist für die Funktion nicht mehr bekannt, deshalb Zuweisung mit self = this
         });
+    }
+
+    addToCanvas(movableObject){
+        this.ctx.drawImage(movableObject.img, movableObject.x, movableObject.y, movableObject.width, movableObject.height);
+    }
+
+    addArrayToCanvas(objects){
+        for(let i = 0; i < objects.length; i++){
+            this.addToCanvas(objects[i]);
+        }
+        // alternativ über eine forEach-Schleife: 
+        // enemies.forEach(enemy => {
+        //      this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height)    
+        // })
     }
 }
