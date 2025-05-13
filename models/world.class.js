@@ -6,6 +6,9 @@ class World {
         new Chicken(), //Chicken Nr. 2
         new Chicken(), //Chicken Nr. 3
     ];
+    clouds = [
+        new Cloud()
+    ];
     canvas;
     ctx;
 
@@ -17,6 +20,11 @@ class World {
 
     draw(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        for(let i = 0; i < this.clouds.length; i++){
+            this.ctx.drawImage(this.clouds[i].img, this.clouds[i].x, this.clouds[i].y, this.clouds[i].width, this.clouds[i].height);
+        }
+
         this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
         
         for(let i = 0; i < this.enemies.length; i++){
