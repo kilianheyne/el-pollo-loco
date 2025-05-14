@@ -7,3 +7,7 @@ function init(){
 
     console.log('My character is ', world.character);
 }
+
+window.addEventListener('onkeydown', (event) => {
+    console.log(event);
+})
