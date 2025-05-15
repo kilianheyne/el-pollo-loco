@@ -7,6 +7,7 @@ class MovableObject {
     imageCache = {};
     currentImage = 0;
     speed = 0.06;
+    otherDirection = false;
     
     loadImage(path){
         this.img = new Image(); // entspricht einer Zusammenfassung von HTML & JS => HTML: <img id="image">; JS: const img = document.getElementById('image');
