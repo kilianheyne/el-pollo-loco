@@ -1,31 +1,31 @@
 class World {
-
+    // #region attributes
     character = new Character();
-    enemies = level1.enemies;
-    clouds = level1.clouds;
-    backgroundObjects = level1.backgroundObjects;
+    level = level1;
     canvas;
     ctx;
     keyboard;
     camera_x = 0;
-
+    // #endregion
+    // #region constructor
     constructor(canvas, keyboard){
-        this.ctx = canvas.getContext('2d');
+        this.ctx = canvas.getContext('2d'); //setzt den Zeichen-Bereich auf 2D 
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.draw();
+        this.draw(); //beim Erstellen der Welt wird draw ausgeführt!
         this.setWorld();
     }
+    // #endregion
+    // #region methods
+    draw(){ // zeichnet alles auf unser Canvas
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); //löscht erstmal alle vorhandenen Inhalte auf dem Canvas
 
-    draw(){
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.translate(this.camera_x, 0); // 
 
-        this.ctx.translate(this.camera_x, 0);
-
-        this.addArrayToCanvas(this.backgroundObjects); //Hintergrund
-        this.addArrayToCanvas(this.clouds); //Wolken
+        this.addArrayToCanvas(this.level.backgroundObjects); //Hintergrund
+        this.addArrayToCanvas(this.level.clouds); //Wolken
         this.addToCanvas(this.character); //main character 
-        this.addArrayToCanvas(this.enemies); //Hühnchen
+        this.addArrayToCanvas(this.level.enemies); //Hühnchen
 
         this.ctx.translate(-this.camera_x, 0);
         
@@ -62,4 +62,5 @@ class World {
     setWorld(){
         this.character.world = this; 
     }
+    // #endregion
 }
