@@ -1,4 +1,5 @@
 class MovableObject {
+    // #region attributes
     x = 100;
     y = 270;
     img;
@@ -8,7 +9,10 @@ class MovableObject {
     currentImage = 0;
     speed = 0.06;
     otherDirection = false;
-    
+    speedY = 0;
+    acceleration = 2.5;
+    // #endregion
+    // #region methods
     loadImage(path){
         this.img = new Image(); // entspricht einer Zusammenfassung von HTML & JS => HTML: <img id="image">; JS: const img = document.getElementById('image');
         this.img.src = path;
@@ -23,13 +27,11 @@ class MovableObject {
     }
 
     moveRight(){
-        console.log('Moving right!');
+        this.x += this.speed;
     }
 
-    moveLeft(){ 
-        setInterval(() => {
-            this.x -= this.speed;
-        }, 1000 / 60)
+    moveLeft(){
+        this.x -= this.speed;
     }
 
     playAnimation(images){
@@ -38,4 +40,22 @@ class MovableObject {
         this.img = this.imageCache[path];
         this.currentImage++;
     }
+
+    applyGravity (){
+        setInterval(() => {
+            if (this.isAboveGround() || this.speedY > 0){
+                this.y -= this.speedY;
+                this.speedY -= this.acceleration;
+            }
+        }, 1000 / 60);
+    }
+
+    isAboveGround(){
+        return this.y < 130;
+    }
+
+    jump(){
+        this.speedY = 30;
+    }
+    // #endregion
 }

@@ -1,8 +1,10 @@
 class Cloud extends MovableObject{
+    // #region attributes
     width = 400;
     height = 250;
     speed = 0.06;
-
+    // #endregion
+    // #region constructor
     constructor(){
         super().loadImage('img/5_background/layers/4_clouds/1.png')
 
@@ -11,8 +13,10 @@ class Cloud extends MovableObject{
 
         this.animate();
     }
-
+    // #endregion
+    // #region methods
     animate(){
         this.moveLeft();
     }
+    // #endregion
 }
