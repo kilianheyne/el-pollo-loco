@@ -14,6 +14,7 @@ class World {
         this.keyboard = keyboard;
         this.draw(); //beim Erstellen der Welt wird draw ausgeführt!
         this.setWorld();
+        this.checkCollision(); // regelmäßig Prüfung, ob zwei moving Object miteinander kollidieren
     }
     // #endregion
     // #region methods
@@ -37,16 +38,25 @@ class World {
 
     addToCanvas(movableObject){
         if(movableObject.otherDirection){
-            this.ctx.save();
-            this.ctx.translate(movableObject.width, 0);
-            this.ctx.scale(-1, 1);
-            movableObject.x = movableObject.x * -1;
+            this.flipImage(movableObject);
         }
-        this.ctx.drawImage(movableObject.img, movableObject.x, movableObject.y, movableObject.width, movableObject.height);
+        movableObject.draw(this.ctx);
+        movableObject.drawFrame(this.ctx);
         if(movableObject.otherDirection){
-            movableObject.x = movableObject.x * -1;
-            this.ctx.restore();
+            this.flipImageBack(movableObject);
         }
+    }
+
+    flipImage(movableObject){
+        this.ctx.save(); //speichert den aktuell Zustand vom Canvas
+        this.ctx.translate(movableObject.width, 0); //verschiebt das Koordinatensystem um die Breite des movableObject, damit dieser nicht aus dem Spielbereich rutscht
+        this.ctx.scale(-1, 1); // Canvas wird horizontal gespiegelt (x-Achse nun negativ, y-Achse unverändert)
+        movableObject.x = movableObject.x * -1; //da Canvas gespiegelt, muss auch Objekt gespiegelt werden
+    }
+
+    flipImageBack(movableObject){
+        movableObject.x = movableObject.x * -1; //kehrt die Spiegelung wieder um
+        this.ctx.restore(); //setzt canvas auf den Stand von save() zurück
     }
 
     addArrayToCanvas(objects){
@@ -62,5 +72,21 @@ class World {
     setWorld(){
         this.character.world = this; 
     }
+
+    checkCollision(movableObject){
+        setInterval(() => {
+            for(let i = 0; i < this.level.enemies.length; i++){
+                let enemy = this.level.enemies[i];
+                if(this.character.isColliding(enemy)){
+                    this.character.hit(); //
+                    console.log('Collision with Character, health:', this.character.health);
+                    if (this.character.health <= 0){
+                        
+                    }
+                }
+            }
+        }, 200);
+    }
     // #endregion
 }
+
