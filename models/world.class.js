@@ -6,6 +6,8 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
+    statusbar = new Statusbar();
+    throwableObjects = [new ThrowableObject(),];
     // #endregion
     // #region constructor
     constructor(canvas, keyboard){
@@ -14,7 +16,7 @@ class World {
         this.keyboard = keyboard;
         this.draw(); //beim Erstellen der Welt wird draw ausgeführt!
         this.setWorld();
-        this.checkCollision(); // regelmäßig Prüfung, ob zwei moving Object miteinander kollidieren
+        this.run(); // regelmäßig Prüfung, ob zwei moving Object miteinander kollidieren
     }
     // #endregion
     // #region methods
@@ -25,9 +27,14 @@ class World {
 
         this.addArrayToCanvas(this.level.backgroundObjects); //Hintergrund
         this.addArrayToCanvas(this.level.clouds); //Wolken
+        this.addArrayToCanvas(this.throwableObjects);
         this.addToCanvas(this.character); //main character 
+        this.ctx.translate(-this.camera_x, 0);
+        // ---- space for fixed objects ----
+        this.addToCanvas(this.statusbar); //health bar
+        this.ctx.translate(this.camera_x, 0);
+        // ---- end for fixed objects ----
         this.addArrayToCanvas(this.level.enemies); //Hühnchen
-
         this.ctx.translate(-this.camera_x, 0);
         
         let self = this;
@@ -72,20 +79,30 @@ class World {
     setWorld(){
         this.character.world = this; 
     }
+    
+    run(){
+            setInterval(() => {
+                this.checkCollision();
+                this.checkThrow();
+            }, 200);
+    }
 
-    checkCollision(movableObject){
-        setInterval(() => {
-            for(let i = 0; i < this.level.enemies.length; i++){
-                let enemy = this.level.enemies[i];
-                if(this.character.isColliding(enemy)){
-                    this.character.hit(); //
-                    console.log('Collision with Character, health:', this.character.health);
-                    if (this.character.health <= 0){
-                        
-                    }
-                }
+    checkCollision(){
+        for(let i = 0; i < this.level.enemies.length; i++){
+            let enemy = this.level.enemies[i];
+            if(this.character.isColliding(enemy)){
+                this.character.hit(); //
+                console.log('Collision with Character, health:', this.character.health);
+                this.statusbar.setHealth(this.character.health);
             }
-        }, 200);
+        }
+    }
+
+    checkThrow(){
+        if(this.keyboard.SHIFT){
+            let bottle = new ThrowableObject(this.character.x, this.character.y);
+            this.throwableObjects.push(bottle);
+        }
     }
     // #endregion
 }
