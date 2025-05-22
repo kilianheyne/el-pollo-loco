@@ -20,6 +20,9 @@ class DrawableObject {
             img.src = arr[i];
             this.imageCache[arr[i]] = img;
         }
+        if (arr.length > 0) {
+            this.img = this.imageCache[arr[0]];
+        }
     }
 
     draw(ctx){

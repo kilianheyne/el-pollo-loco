@@ -8,7 +8,6 @@ class Character extends MovableObject{
 
     lastActionTime = Date.now();
     londIdleTimeout;
-    currentAnimation = null;
     isInLongIdle = false;
     
     // #endregion
@@ -33,11 +32,11 @@ class Character extends MovableObject{
         this.isInLongIdle = false; //befindet sich jetzt nur in der normalen idle-Animation
         this.lastActionTime = Date.now();
         this.longIdleTimeout = setTimeout(() => {
-            if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT && !this.world.keyboard.SPACE && !this.isAboveGround()){
+            if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT && !this.world.keyboard.SPACE){
                 this.playAnimation(ImageHub.pepe.longIdle);
                 this.isInLongIdle = true; // befindet sich in der langen Animation
             }
-        }, 5000)
+        }, 10000)
     }
 
     animate(){
@@ -74,7 +73,6 @@ class Character extends MovableObject{
             } else {
                 this.playAnimation(ImageHub.pepe.idle);
             }
-            
         }, 104);
     }
     // #endregion 

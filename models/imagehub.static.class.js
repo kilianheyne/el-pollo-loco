@@ -93,4 +93,32 @@ class ImageHub {
         dead: [],
     }
     // #endregion
+    // #region statusbar
+    static statusbar = {
+        coin: [
+            'img/7_statusbars/1_statusbar/1_statusbar_coin/orange/0.png',
+            'img/7_statusbars/1_statusbar/1_statusbar_coin/orange/20.png',
+            'img/7_statusbars/1_statusbar/1_statusbar_coin/orange/40.png',
+            'img/7_statusbars/1_statusbar/1_statusbar_coin/orange/60.png',
+            'img/7_statusbars/1_statusbar/1_statusbar_coin/orange/80.png',
+            'img/7_statusbars/1_statusbar/1_statusbar_coin/orange/100.png'
+        ],
+        health: [
+            'img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png',
+            'img/7_statusbars/1_statusbar/2_statusbar_health/green/80.png',
+            'img/7_statusbars/1_statusbar/2_statusbar_health/green/60.png',
+            'img/7_statusbars/1_statusbar/2_statusbar_health/green/40.png',
+            'img/7_statusbars/1_statusbar/2_statusbar_health/green/20.png',
+            'img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png',
+        ],
+        bottle: [
+            'img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/0.png',
+            'img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/20.png',
+            'img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/40.png',
+            'img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/60.png',
+            'img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/80.png',
+            'img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/100.png',
+        ]
+    }
+    // #endregion
 }

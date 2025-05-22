@@ -6,7 +6,11 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    statusbar = new Statusbar();
+    statusbar = {
+        health: new HealthBar(),
+        coins: new CoinBar(),
+        bottles: new BottleBar()
+    }
     throwableObjects = [new ThrowableObject(),];
     // #endregion
     // #region constructor
@@ -31,7 +35,9 @@ class World {
         this.addToCanvas(this.character); //main character 
         this.ctx.translate(-this.camera_x, 0);
         // ---- space for fixed objects ----
-        this.addToCanvas(this.statusbar); //health bar
+        this.addToCanvas(this.statusbar.health); //health bar
+        this.addToCanvas(this.statusbar.coins); //coin bar
+        this.addToCanvas(this.statusbar.bottles); //bottles bar
         this.ctx.translate(this.camera_x, 0);
         // ---- end for fixed objects ----
         this.addArrayToCanvas(this.level.enemies); //Hühnchen
