@@ -32,6 +32,7 @@ class World {
         this.addArrayToCanvas(this.level.backgroundObjects); //Hintergrund
         this.addArrayToCanvas(this.level.clouds); //Wolken
         this.addArrayToCanvas(this.throwableObjects);
+        this.addArrayToCanvas(this.level.coins);
         this.addToCanvas(this.character); //main character 
         this.ctx.translate(-this.camera_x, 0);
         // ---- space for fixed objects ----

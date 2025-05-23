@@ -1,0 +1,3 @@
+class Salsabottle extends Collectable {
+    
+}

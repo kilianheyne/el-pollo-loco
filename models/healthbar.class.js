@@ -32,5 +32,5 @@ class HealthBar extends Statusbar {
             return 5;
         }
     }
-    //
+    // #endregion
 }

@@ -1,22 +1,23 @@
 class Cloud extends MovableObject{
     // #region attributes
-    width = 400;
-    height = 250;
-    speed = 0.06;
+    width = 2000;
+    height = 600;
+    speed = 0.03;
+    y = -70;
     // #endregion
     // #region constructor
     constructor(){
-        super().loadImage('img/5_background/layers/4_clouds/1.png')
-
-        this.x = Math.random() * 500;
-        this.y = Math.random() * 150;
-
-        this.animate();
+        super();
+        this.loadImage('img/5_background/layers/4_clouds/full.png') //fügt das Bild auf dem Canvas ein
+        this.x = Math.random() * 500; // zufällige Positionierung auf der x-Koordinate
+        this.animate(); // führt die Funktion animate() aus, welche dafür sorgt, das sich die Wolke langsam nach links bewegt
     }
     // #endregion
     // #region methods
     animate(){
-        this.moveLeft();
+        setInterval(() => {
+            this.moveLeft();
+        }, 1000 / 60);
     }
     // #endregion
 }
