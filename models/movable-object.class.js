@@ -11,10 +11,10 @@ class MovableObject extends DrawableObject {
     // #region methods
 
     isColliding(movableObject){
-        return this.x + this.width > movableObject.x &&
-            this.y + this.height > movableObject.y &&
-            this.x < movableObject.x &&
-            this.y < movableObject.y + movableObject.height
+        return this.rX + this.rWidth > movableObject.rX &&
+            this.rY + this.rHeight > movableObject.rY &&
+            this.rX < movableObject.rX &&
+            this.rY < movableObject.rY + movableObject.rHeight
     }
 
     playAnimation(images){ //iterates through an array of pictures to simulate an animation

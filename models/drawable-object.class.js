@@ -7,6 +7,12 @@ class DrawableObject {
     img;
     imageCache = {};
     currentImage = 0;
+
+    rX; //"realFrame"-Variable für bessere Hitboxen im Gameplay
+    rY; //"realFrame"-Variable für bessere Hitboxen im Gameplay
+    rWidth; //"realFrame"-Variable für bessere Hitboxen im Gameplay
+    rHeight; //"realFrame"-Variable für bessere Hitboxen im Gameplay
+
     // #endregion
     // #region methods
     loadImage(path){
@@ -37,5 +43,22 @@ class DrawableObject {
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
+    }
+
+    drawSecondFrame(ctx){
+        if(this instanceof Character || this instanceof Salsabottle){
+            ctx.beginPath();
+            ctx.lineWidth = '5';
+            ctx.strokeStyle = 'red';
+            ctx.rect(this.rX, this.rY, this.rWidth, this.rHeight);
+            ctx.stroke();
+        }
+    }
+
+    getRealFrame(){
+        this.rX = this.x + this.offset.left;
+        this.rY = this.y + this.offset.top;
+        this.rWidth = this.width - this.offset.left - this.offset.right;
+        this.rHeight = this.height - this.offset.top - this.offset.bottom;
     }
 }

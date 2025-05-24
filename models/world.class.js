@@ -65,6 +65,7 @@ class World {
         }
         movableObject.draw(this.ctx);
         movableObject.drawFrame(this.ctx);
+        movableObject.drawSecondFrame(this.ctx);
         if(movableObject.otherDirection){
             this.flipImageBack(movableObject);
         }
@@ -75,10 +76,12 @@ class World {
         this.ctx.translate(movableObject.width, 0); //verschiebt das Koordinatensystem um die Breite des movableObject, damit dieser nicht aus dem Spielbereich rutscht
         this.ctx.scale(-1, 1); // Canvas wird horizontal gespiegelt (x-Achse nun negativ, y-Achse unverändert)
         movableObject.x = movableObject.x * -1; //da Canvas gespiegelt, muss auch Objekt gespiegelt werden
+        movableObject.rX = movableObject.rX * -1;
     }
 
     flipImageBack(movableObject){
         movableObject.x = movableObject.x * -1; //kehrt die Spiegelung wieder um
+        movableObject.rX = movableObject.rX * -1;
         this.ctx.restore(); //setzt canvas auf den Stand von save() zurück
     }
 
@@ -131,7 +134,7 @@ class World {
     checkSalsaCollision(){
         for (let i = 0; i < this.level.bottles.length; i++){
             let bottle = this.level.bottles[i];
-            if(this.character.isColliding(bottle)){
+            if(this.character.isColliding(bottle)){ //siehe checkCoinCollision(){}
                 this.level.bottles.splice(i, 1);
                 i--;
                 this.collectedBottles.push(bottle);

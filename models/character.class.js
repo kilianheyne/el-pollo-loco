@@ -9,6 +9,15 @@ class Character extends MovableObject{
     lastActionTime = Date.now();
     londIdleTimeout;
     isInLongIdle = false;
+
+    offset = {
+        top: 120,
+        right: 30,
+        bottom: 15,
+        left: 20
+    };
+
+    
     
     // #endregion
     // #region constructor
@@ -23,6 +32,7 @@ class Character extends MovableObject{
         this.animate();
         this.applyGravity();
         this.resetLongIdleTimer();
+        this.getRealFrame();
     }
     // #endregion
     // #region methods
@@ -55,6 +65,7 @@ class Character extends MovableObject{
                 this.jump();
             }
             this.world.camera_x = -this.x + 100;
+            this.getRealFrame();
         }, 1000 / 60);
 
         setInterval(() => { 
