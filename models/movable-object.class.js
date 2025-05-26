@@ -3,7 +3,7 @@ class MovableObject extends DrawableObject {
     speed = 0.06;
     otherDirection = false;
     speedY = 0;
-    acceleration = 2.5;
+    acceleration = 1.6;
     health = 100;
     damage = 0;
     lastHit = 0;
@@ -54,10 +54,22 @@ class MovableObject extends DrawableObject {
         this.speedY = 30; //height of jump
     }
 
+    stomp(){
+        this.loadImage(ImageHub.chicken.dead);
+        this.speed = 0;
+
+        setTimeout(() => {
+            const index = this.world.level.enemies.indexOf(this);
+            if (index > -1) {
+                this.world.level.enemies.splice(index, 1);
+            }
+        }, 500)
+    }
+
     hit(){
-        this.health -= 15; // this.movableObject.damage
+        this.health -= 15; // this.movableObject.damage - Leben wird bei Kontakt reduziert
         if (this.health < 0){
-            this.health = 0;
+            this.health = 0; // Leben kann nicht unter 0 fallen (negative Werte könnten die Death-Animation unterbinden)
         } else {
             this.lastHit = new Date().getTime(); //saving time in miliseconds
         }

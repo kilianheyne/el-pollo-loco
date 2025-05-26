@@ -32,7 +32,6 @@ class Character extends MovableObject{
         this.animate();
         this.applyGravity();
         this.resetLongIdleTimer();
-        this.getRealFrame();
     }
     // #endregion
     // #region methods

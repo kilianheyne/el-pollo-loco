@@ -29,6 +29,8 @@ class World {
         this.statusbar.health.world = this;
         this.statusbar.coins.world = this;
         this.statusbar.bottles.world = this;
+
+        this.level.enemies.forEach(enemy => enemy.world = this);
     }
     // #endregion
     // #region methods
@@ -64,11 +66,11 @@ class World {
             this.flipImage(movableObject);
         }
         movableObject.draw(this.ctx);
-        movableObject.drawFrame(this.ctx);
-        movableObject.drawSecondFrame(this.ctx);
         if(movableObject.otherDirection){
             this.flipImageBack(movableObject);
         }
+        movableObject.drawFrame(this.ctx);
+        movableObject.drawSecondFrame(this.ctx);
     }
 
     flipImage(movableObject){
@@ -100,21 +102,28 @@ class World {
     }
     
     run(){
-            setInterval(() => {
-                this.checkChickenCollision();
-                this.checkCoinCollision();
-                this.checkSalsaCollision();
-                this.checkThrow();
-            }, 200);
+        setInterval(() => {
+            this.checkChickenCollision();
+            this.checkCoinCollision();
+            this.checkSalsaCollision();
+            this.checkThrow();
+        }, 200);
     }
 
     checkChickenCollision(){
-        for(let i = 0; i < this.level.enemies.length; i++){
+        for (let i = 0; i < this.level.enemies.length; i++){
             let enemy = this.level.enemies[i];
-            if(this.character.isColliding(enemy)){
-                this.character.hit(); //
-                console.log('Collision with Character, health:', this.character.health);
-                this.statusbar.setHealth(this.character.health);
+            if (this.character.isColliding(enemy)){
+                if (this.character.isColliding(enemy) && this.character.speedY < -23){
+                    console.log('Stomping on Chicken registered');
+                    console.log(this.character.speedY);
+                    enemy.stomp();
+                    this.character.jump();
+                } else {
+                    this.character.hit(); 
+                    console.log('Collision with Character, health:', this.character.health);
+                    this.statusbar.health.setHealth(this.character.health);
+                }
             }
         }
     }
