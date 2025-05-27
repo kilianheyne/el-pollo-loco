@@ -13,22 +13,22 @@ class Character extends MovableObject{
     offset = {
         top: 120,
         right: 30,
-        bottom: 15,
+        bottom: 10,
         left: 20
     };
 
-    
-    
     // #endregion
     // #region constructor
     constructor(){
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
+
         this.loadImages(ImageHub.pepe.idle);
         this.loadImages(ImageHub.pepe.longIdle);
         this.loadImages(ImageHub.pepe.walk);
         this.loadImages(ImageHub.pepe.jump);
         this.loadImages(ImageHub.pepe.hurt);
         this.loadImages(ImageHub.pepe.dead);
+
         this.animate();
         this.applyGravity();
         this.resetLongIdleTimer();
@@ -63,8 +63,8 @@ class Character extends MovableObject{
             if(this.world.keyboard.SPACE && !this.isAboveGround()){ //jumping
                 this.jump();
             }
-            this.world.camera_x = -this.x + 100;
             this.getRealFrame();
+            this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
         setInterval(() => { 

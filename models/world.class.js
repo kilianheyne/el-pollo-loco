@@ -116,7 +116,7 @@ class World {
             let enemy = this.level.enemies[i];
             if (this.character.isColliding(enemy)){
                 if (this.character.isColliding(enemy) && this.character.speedY < -23){
-                    enemy.stomp();
+                    enemy.hitOnChicken();
                     this.character.jump();
                 } else {
                     this.character.hit(); 
@@ -166,10 +166,10 @@ class World {
                 let enemy = this.level.enemies[j];
                 if (bottle.isColliding(enemy)){
                     console.log('Bottle hit an enemy!');
-                    enemy.hitByBottle();
+                    enemy.hitOnChicken();
                     bottle.playAnimation(ImageHub.salsabottle.splash);
-                    this.throwableObjects.splice(i, 1);
-                    i--;
+                    // this.throwableObjects.splice(i, 1);
+                    // i--;
                 }
             }
         }

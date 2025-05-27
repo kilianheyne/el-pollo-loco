@@ -7,7 +7,15 @@ class MovableObject extends DrawableObject {
     health = 100;
     damage = 0;
     lastHit = 0;
+    markedForDeletion = false;
+    deletionCounter = 30; // time delay until enemy vanishes from canvas
     // #endregion
+
+    constructor(){
+        super();
+
+        IntervalHub.setStoppableInterval(this.deletionCountdown, 1000/30);
+    }
     // #region methods
 
     isColliding(movableObject){
@@ -42,34 +50,51 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround(){
-        if(this instanceof ThrowableObject){ //a throwable object should always fall 
+        if(this instanceof ThrowableObject){ //a throwable object should always fall
             return true;
         } else {
             return this.y < 130; // level of the ground 
         }
-        
+
     }
 
     jump(){
         this.speedY = 24; //height of jump
     }
 
-    stomp(){
+    hitOnChicken(){
         this.loadImage(ImageHub.chicken.dead);
         this.stopChicken();
-
-        setTimeout(() => {
-            const index = this.world.level.enemies.indexOf(this);
-            if (index > -1) {
-                this.world.level.enemies.splice(index, 1);
-            }
-        }, 500);
+        this.markedForDeletion = true; // Flag, zum Entfernen des Sprites vom Canvas
+        this.deletionCounter = 30;
     }
+
+    // hitByBottle(){
+    //     this.loadImage(ImageHub.chicken.dead);
+    //     this.stopChicken();
+    //     this.markedForDeletion = true; // Flag, zum Entfernen des Sprites vom Canvas
+    // }
 
     stopChicken(){
         this.speed = 0; //interrupts movement to the left
         clearInterval(this.walkInterval); //interrupts animation
         clearInterval(this.moveInterval);
+    }
+
+    deletionCountdown = () => {
+        if(this.markedForDeletion){
+            this.deletionCounter--;
+        }
+        if(this.deletionCounter <= 0){
+            this.removeFromWorld();
+        }
+    }
+
+    removeFromWorld = () => {
+        const index = this.world.level.enemies.indexOf(this);
+        if (index >- 1){
+            this.world.level.enemies.splice(index, 1);
+        }
     }
 
     hit(){
@@ -79,18 +104,6 @@ class MovableObject extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime(); //saving time in miliseconds
         }
-    }
-
-    hitByBottle(){
-        this.loadImage(ImageHub.chicken.dead);
-        this.stopChicken();
-
-        setTimeout(() => {
-            const index = this.world.level.enemies.indexOf(this);
-            if (index > -1) {
-                this.world.level.enemies.splice(index, 1);
-            }
-        }, 500);
     }
 
     isHurt(){

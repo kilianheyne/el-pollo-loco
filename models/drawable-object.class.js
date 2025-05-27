@@ -46,7 +46,7 @@ class DrawableObject {
     }
 
     drawSecondFrame(ctx){
-        if(this instanceof ThrowableObject || this instanceof Chicken){
+        if(this instanceof ThrowableObject || this instanceof Chicken || this instanceof Character || this instanceof Endboss){
             ctx.beginPath();
             ctx.lineWidth = '5';
             ctx.strokeStyle = 'red';
