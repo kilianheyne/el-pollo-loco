@@ -1,3 +1,4 @@
+// #region ImageHub
 class ImageHub {
     // #region playable character Pepe
     static pepe = {
@@ -120,5 +121,43 @@ class ImageHub {
             'img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/100.png',
         ]
     }
+    // #endregion 
+    // #region salsabottle
+    static salsabottle = {
+        rotation: [
+            'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
+            'img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
+            'img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png',
+            'img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png'
+        ],
+        splash: [
+            'img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
+            'img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png',
+            'img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
+            'img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
+            'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
+            'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
+        ]
+    }
     // #endregion
+}
+// #endregion
+
+class IntervalHub {
+
+    static everyInterval = [];
+
+    static setStoppableInterval(fn, time){
+        let newInterval = setInterval(fn, time);
+        IntervalHub.everyInterval.push(newInterval);
+        return newInterval;
+    }
+
+    static stopEveryInterval(){
+        IntervalHub.everyInterval.forEach(clearInterval);
+    }
+
+    static stopInterval(fn){
+        clearInterval(fn);
+    }
 }

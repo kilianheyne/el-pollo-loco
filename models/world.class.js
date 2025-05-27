@@ -15,7 +15,7 @@ class World {
     };
     collectedCoins = [];
     collectedBottles = [];
-    throwableObjects = [new ThrowableObject(),];
+    throwableObjects = [];
     // #endregion
     // #region constructor
     constructor(canvas, keyboard){
@@ -107,6 +107,7 @@ class World {
             this.checkCoinCollision();
             this.checkSalsaCollision();
             this.checkThrow();
+            this.checkThrowableCollision();
         }, 200);
     }
 
@@ -115,13 +116,10 @@ class World {
             let enemy = this.level.enemies[i];
             if (this.character.isColliding(enemy)){
                 if (this.character.isColliding(enemy) && this.character.speedY < -23){
-                    console.log('Stomping on Chicken registered');
-                    console.log(this.character.speedY);
                     enemy.stomp();
                     this.character.jump();
                 } else {
                     this.character.hit(); 
-                    console.log('Collision with Character, health:', this.character.health);
                     this.statusbar.health.setHealth(this.character.health);
                 }
             }
@@ -153,9 +151,27 @@ class World {
     }
 
     checkThrow(){
-        if(this.keyboard.SHIFT){
-            let bottle = new ThrowableObject(this.character.x, this.character.y);
+        if(this.keyboard.SHIFT && this.collectedBottles.length > 0){
+            let bottle = new ThrowableObject(this.character.x, this.character.y, this.character.otherDirection);
             this.throwableObjects.push(bottle);
+            this.collectedBottles.pop(); // entfernt eine Einheit aus dem Array
+            this.statusbar.bottles.setBottleBar(); //Statusanzeige aktualisieren
+        }
+    }
+
+    checkThrowableCollision(){
+        for (let i = 0; i < this.throwableObjects.length; i++){
+            let bottle = this.throwableObjects[i];
+            for (let j = 0; j < this.level.enemies.length; j++){
+                let enemy = this.level.enemies[j];
+                if (bottle.isColliding(enemy)){
+                    console.log('Bottle hit an enemy!');
+                    enemy.hitByBottle();
+                    bottle.playAnimation(ImageHub.salsabottle.splash);
+                    this.throwableObjects.splice(i, 1);
+                    i--;
+                }
+            }
         }
     }
     // #endregion

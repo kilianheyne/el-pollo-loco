@@ -1,8 +1,8 @@
 class Chicken extends MovableObject{
     // #region attributes
     y = 360;
-    width = 60;
-    height = 60;
+    width = 80;
+    height = 80;
     damage = 15; 
 
     offset = {
@@ -15,23 +15,26 @@ class Chicken extends MovableObject{
     // #endregion
     // #region constructor
     constructor(){
-        super(); 
+        super();
+        
         this.loadImages(ImageHub.chicken.walk);
         this.x = 200 + Math.random() * 500;
-        this.animate();
         this.speed = 0.06 + Math.random() * 0.25;
+
+        this.walkInterval = IntervalHub.setStoppableInterval(this.animateWalk, 1000/5);
+        this.moveInterval = IntervalHub.setStoppableInterval(this.animateMovement, 1000/60);
     }
     // #endregion
     // #region methods
-    animate(){ 
-        setInterval(() => { // walk animation
-            this.playAnimation(ImageHub.chicken.walk);
-        }, 1000 / 5);
 
-        setInterval(() => { //actual movement
-            this.moveLeft();
-            this.getRealFrame();
-        }, 1000 / 60)
+    animateWalk = () => {
+        this.playAnimation(ImageHub.chicken.walk);
     }
+
+    animateMovement = () => {
+        this.moveLeft();
+        this.getRealFrame();
+    }
+
     // #endregion
 }

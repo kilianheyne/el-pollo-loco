@@ -51,19 +51,25 @@ class MovableObject extends DrawableObject {
     }
 
     jump(){
-        this.speedY = 30; //height of jump
+        this.speedY = 24; //height of jump
     }
 
     stomp(){
         this.loadImage(ImageHub.chicken.dead);
-        this.speed = 0;
+        this.stopChicken();
 
         setTimeout(() => {
             const index = this.world.level.enemies.indexOf(this);
             if (index > -1) {
                 this.world.level.enemies.splice(index, 1);
             }
-        }, 500)
+        }, 500);
+    }
+
+    stopChicken(){
+        this.speed = 0; //interrupts movement to the left
+        clearInterval(this.walkInterval); //interrupts animation
+        clearInterval(this.moveInterval);
     }
 
     hit(){
@@ -73,6 +79,18 @@ class MovableObject extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime(); //saving time in miliseconds
         }
+    }
+
+    hitByBottle(){
+        this.loadImage(ImageHub.chicken.dead);
+        this.stopChicken();
+
+        setTimeout(() => {
+            const index = this.world.level.enemies.indexOf(this);
+            if (index > -1) {
+                this.world.level.enemies.splice(index, 1);
+            }
+        }, 500);
     }
 
     isHurt(){

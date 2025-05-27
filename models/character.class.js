@@ -68,22 +68,22 @@ class Character extends MovableObject{
         }, 1000 / 60);
 
         setInterval(() => { 
-            if (this.isDead()){ //dying animation
+            if (this.isDead()){ // dying animation
                 this.playAnimation(ImageHub.pepe.dead);
-            } else if (this.isHurt()){
+            } else if (this.isHurt()){ // hurt animation
                 this.playAnimation(ImageHub.pepe.hurt);
             } else if (this.isAboveGround()){ // jump animation
                 this.playAnimation(ImageHub.pepe.jump);
-                this.resetLongIdleTimer(); //unterbricht die longIdle-Animation
+                this.resetLongIdleTimer(); // unterbricht die longIdle-Animation
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT){ // walk animation
                 this.playAnimation(ImageHub.pepe.walk);
-                this.resetLongIdleTimer(); //unterbricht die longIdle-Animation
+                this.resetLongIdleTimer(); // unterbricht die longIdle-Animation
             } else if (this.isInLongIdle){
                 this.playAnimation(ImageHub.pepe.longIdle);
             } else {
                 this.playAnimation(ImageHub.pepe.idle);
             }
-        }, 104);
+        }, 1000 / 8);
     }
     // #endregion 
 }
