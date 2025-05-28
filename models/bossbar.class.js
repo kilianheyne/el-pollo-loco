@@ -4,10 +4,10 @@ class BossHealthBar extends Statusbar {
     constructor(){
         super();
         this.loadImages(ImageHub.statusbar.boss);
-        this.x = 180;
+        this.x = 200;
         this.y = 54;
-        this.width = 400;
-        this.height = 80;
+        this.width = 350;
+        this.height = 70;
         this.setHealth(100);
     }
 

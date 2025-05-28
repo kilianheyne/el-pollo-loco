@@ -23,6 +23,8 @@ class World {
         this.ctx = canvas.getContext('2d'); //setzt den Zeichen-Bereich auf 2D 
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.endboss = this.level.enemies.find(e => e instanceof Endboss);
+
         this.draw(); //beim Erstellen der Welt wird draw ausgeführt!
         this.setWorld();
         this.run(); // regelmäßig Prüfung, ob zwei moving Object miteinander kollidieren
@@ -33,6 +35,7 @@ class World {
         this.statusbar.boss.world = this;
 
         this.level.enemies.forEach(enemy => enemy.world = this);
+
     }
     // #endregion
     // #region methods
@@ -52,7 +55,9 @@ class World {
         this.addToCanvas(this.statusbar.health); //health bar
         this.addToCanvas(this.statusbar.coins); //coin bar
         this.addToCanvas(this.statusbar.bottles); //bottles bar
-        this.addToCanvas(this.statusbar.boss); //boss health bar
+        if (this.character.x > this.endboss.x - this.canvas.width + 200 && !this.endboss.isDead){
+            this.addToCanvas(this.statusbar.boss); //boss health bar
+        }
         this.ctx.translate(this.camera_x, 0);
         // ---- end for fixed objects ----
         this.addArrayToCanvas(this.level.enemies); //Hühnchen
@@ -162,22 +167,6 @@ class World {
         }
     }
 
-    // checkThrowableCollision(){
-    //     for (let i = 0; i < this.throwableObjects.length; i++){
-    //         let bottle = this.throwableObjects[i];
-    //         for (let j = 0; j < this.level.enemies.length; j++){
-    //             let enemy = this.level.enemies[j];
-    //             if (bottle.isColliding(enemy)){
-    //                 console.log('Bottle hit an enemy!');
-    //                 enemy.hitOnChicken();
-    //                 bottle.playAnimation(ImageHub.salsabottle.splash);
-    //                 this.throwableObjects.splice(i, 1);
-    //                 i--;
-    //             }
-    //         }
-    //     }
-    // }
-
     checkThrowableCollision(){
         for (let i = 0; i < this.throwableObjects.length; i++){
             let bottle = this.throwableObjects[i];
@@ -189,7 +178,11 @@ class World {
                     let enemy = this.level.enemies[j];
                     if (bottle.isColliding(enemy)){
                         console.log('Bottle hit an enemy!');
-                        enemy.hitOnChicken();
+                        if (enemy instanceof Endboss){
+                            enemy.gotHit();
+                        } else {
+                            enemy.hitOnChicken();
+                        }
                         bottle.splash();
                     }
                 }
