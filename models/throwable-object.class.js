@@ -27,7 +27,7 @@ class ThrowableObject extends MovableObject {
         this.facingLeft = facingLeft;
 
         IntervalHub.setStoppableInterval(this.animate, 1000/60);
-        //IntervalHub.setStoppableInterval(this.throw(x, y), 1000/60);
+        //this.throwInterval = IntervalHub.setStoppableInterval(this.throw(x, y), 1000/60);
     }
     // #endregion
     // region methods
@@ -37,7 +37,7 @@ class ThrowableObject extends MovableObject {
         this.speedY = 25;
         this.applyGravity();
 
-        setInterval(() => {
+        this.throwInterval = setInterval(() => {
             if (this.facingLeft){
                 this.x -= 12;
             } else {
@@ -61,12 +61,16 @@ class ThrowableObject extends MovableObject {
 
     animate = () => {
         this.getRealFrame();
-        this.playAnimation(ImageHub.salsabottle.rotation);
+        if(!this.enemyHitted){
+            this.playAnimation(ImageHub.salsabottle.rotation);
+        }
     }
 
     splash(){
         this.enemyHitted = true;
         this.speedY = 0;
+        clearInterval(this.throwInterval);
+        clearInterval(this.gravityInterval);
         this.playAnimation(ImageHub.salsabottle.splash);
 
         setTimeout(() => {

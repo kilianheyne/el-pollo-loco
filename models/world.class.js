@@ -11,7 +11,8 @@ class World {
     statusbar = {
         health: new HealthBar(),
         coins: new CoinBar(),
-        bottles: new BottleBar()
+        bottles: new BottleBar(),
+        boss: new BossHealthBar()
     };
     collectedCoins = [];
     collectedBottles = [new ThrowableObject(), new ThrowableObject(), new ThrowableObject(), new ThrowableObject()];
@@ -29,6 +30,7 @@ class World {
         this.statusbar.health.world = this;
         this.statusbar.coins.world = this;
         this.statusbar.bottles.world = this;
+        this.statusbar.boss.world = this;
 
         this.level.enemies.forEach(enemy => enemy.world = this);
     }
@@ -50,6 +52,7 @@ class World {
         this.addToCanvas(this.statusbar.health); //health bar
         this.addToCanvas(this.statusbar.coins); //coin bar
         this.addToCanvas(this.statusbar.bottles); //bottles bar
+        this.addToCanvas(this.statusbar.boss); //boss health bar
         this.ctx.translate(this.camera_x, 0);
         // ---- end for fixed objects ----
         this.addArrayToCanvas(this.level.enemies); //Hühnchen

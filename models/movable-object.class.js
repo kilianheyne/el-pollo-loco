@@ -15,7 +15,7 @@ class MovableObject extends DrawableObject {
         super();
 
         IntervalHub.setStoppableInterval(this.deletionCountdown, 1000/30);
-        IntervalHub.setStoppableInterval(this.applyGravity, 1000/60)
+        this.gravityInterval = IntervalHub.setStoppableInterval(this.applyGravity, 1000/60)
         //
     }
     // #region methods
