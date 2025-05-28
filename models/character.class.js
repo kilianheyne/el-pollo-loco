@@ -42,8 +42,8 @@ class Character extends MovableObject{
         this.lastActionTime = Date.now();
         this.longIdleTimeout = setTimeout(() => {
             if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT && !this.world.keyboard.SPACE){
-                this.playAnimation(ImageHub.pepe.longIdle);
                 this.isInLongIdle = true; // befindet sich in der langen Animation
+                this.playAnimation(ImageHub.pepe.longIdle);
             }
         }, 10000)
     }
