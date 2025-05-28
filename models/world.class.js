@@ -14,7 +14,7 @@ class World {
         bottles: new BottleBar()
     };
     collectedCoins = [];
-    collectedBottles = [];
+    collectedBottles = [new ThrowableObject(), new ThrowableObject(), new ThrowableObject(), new ThrowableObject()];
     throwableObjects = [];
     // #endregion
     // #region constructor
@@ -159,17 +159,36 @@ class World {
         }
     }
 
+    // checkThrowableCollision(){
+    //     for (let i = 0; i < this.throwableObjects.length; i++){
+    //         let bottle = this.throwableObjects[i];
+    //         for (let j = 0; j < this.level.enemies.length; j++){
+    //             let enemy = this.level.enemies[j];
+    //             if (bottle.isColliding(enemy)){
+    //                 console.log('Bottle hit an enemy!');
+    //                 enemy.hitOnChicken();
+    //                 bottle.playAnimation(ImageHub.salsabottle.splash);
+    //                 this.throwableObjects.splice(i, 1);
+    //                 i--;
+    //             }
+    //         }
+    //     }
+    // }
+
     checkThrowableCollision(){
         for (let i = 0; i < this.throwableObjects.length; i++){
             let bottle = this.throwableObjects[i];
-            for (let j = 0; j < this.level.enemies.length; j++){
-                let enemy = this.level.enemies[j];
-                if (bottle.isColliding(enemy)){
-                    console.log('Bottle hit an enemy!');
-                    enemy.hitOnChicken();
-                    bottle.playAnimation(ImageHub.salsabottle.splash);
-                    // this.throwableObjects.splice(i, 1);
-                    // i--;
+            if (bottle.enemyHitted && bottle.splashAnimated){
+                this.throwableObjects.splice(i, 1);
+                i--
+            } else {
+                for (let j = 0; j < this.level.enemies.length; j++){
+                    let enemy = this.level.enemies[j];
+                    if (bottle.isColliding(enemy)){
+                        console.log('Bottle hit an enemy!');
+                        enemy.hitOnChicken();
+                        bottle.splash();
+                    }
                 }
             }
         }

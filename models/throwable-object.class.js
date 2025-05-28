@@ -1,6 +1,9 @@
 class ThrowableObject extends MovableObject {
     // #region attributes
 
+    enemyHitted = false;
+    splashAnimated = false;
+
     offset = {
         top: 20,
         right: 20,
@@ -59,6 +62,16 @@ class ThrowableObject extends MovableObject {
     animate = () => {
         this.getRealFrame();
         this.playAnimation(ImageHub.salsabottle.rotation);
+    }
+
+    splash(){
+        this.enemyHitted = true;
+        this.speedY = 0;
+        this.playAnimation(ImageHub.salsabottle.splash);
+
+        setTimeout(() => {
+            this.splashAnimated = true;
+        }, 400);
     }
     // #endregion
 }
