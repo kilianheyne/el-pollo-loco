@@ -1,0 +1,3 @@
+class BossHealthBar extends Statusbar {
+    
+}

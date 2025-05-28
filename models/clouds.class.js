@@ -1,4 +1,4 @@
-class Cloud extends MovableObject{
+class Cloud extends DrawableObject{
     // #region attributes
     width = 2000;
     height = 600;
@@ -11,13 +11,17 @@ class Cloud extends MovableObject{
         this.loadImage('img/5_background/layers/4_clouds/full.png') //fügt das Bild auf dem Canvas ein
         this.x = Math.random() * 500; // zufällige Positionierung auf der x-Koordinate
         this.animate(); // führt die Funktion animate() aus, welche dafür sorgt, das sich die Wolke langsam nach links bewegt
+    
+        IntervalHub.setStoppableInterval(this.animate, 1000/60);
     }
     // #endregion
     // #region methods
-    animate(){
-        setInterval(() => {
-            this.moveLeft();
-        }, 1000 / 60);
+    animate = () => {
+        this.moveLeft();
+    }
+
+    moveLeft(){ //moving left
+        this.x -= this.speed;
     }
     // #endregion
 }

@@ -15,6 +15,8 @@ class MovableObject extends DrawableObject {
         super();
 
         IntervalHub.setStoppableInterval(this.deletionCountdown, 1000/30);
+        IntervalHub.setStoppableInterval(this.applyGravity, 1000/60)
+        //
     }
     // #region methods
 
@@ -40,13 +42,20 @@ class MovableObject extends DrawableObject {
         this.x -= this.speed;
     }
 
-    applyGravity (){
-        setInterval(() => {
-            if (this.isAboveGround() || this.speedY > 0){
-                this.y -= this.speedY;
-                this.speedY -= this.acceleration;
-            }
-        }, 1000 / 60);
+    // applyGravity (){
+    //     setInterval(() => {
+    //         if (this.isAboveGround() || this.speedY > 0){
+    //             this.y -= this.speedY;
+    //             this.speedY -= this.acceleration;
+    //         }
+    //     }, 1000 / 60);
+    // }
+
+    applyGravity = () => {
+        if (this.isAboveGround() || this.speedY > 0){
+            this.y -= this.speedY;
+            this.speedY -= this.acceleration;
+        }
     }
 
     isAboveGround(){
