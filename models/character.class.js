@@ -70,8 +70,10 @@ class Character extends MovableObject{
         setInterval(() => { 
             if (this.isDead()){ // dying animation
                 this.playAnimation(ImageHub.pepe.dead);
+                this.resetLongIdleTimer();
             } else if (this.isHurt()){ // hurt animation
                 this.playAnimation(ImageHub.pepe.hurt);
+                this.resetLongIdleTimer();
             } else if (this.isAboveGround()){ // jump animation
                 this.playAnimation(ImageHub.pepe.jump);
                 this.resetLongIdleTimer(); // unterbricht die longIdle-Animation

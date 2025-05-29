@@ -1,5 +1,5 @@
 class BossHealthBar extends Statusbar {
-    percentage = 100;
+    percentage = 5;
 
     constructor(){
         super();
@@ -18,15 +18,15 @@ class BossHealthBar extends Statusbar {
     }
 
     resolveImageIndex(){
-        if (this.percentage === 100){
+        if (this.percentage >= 5){
             return 0;
-        } else if (this.percentage > 80){
+        } else if (this.percentage >= 4){
             return 1;
-        } else if (this.percentage > 60){
+        } else if (this.percentage >= 3){
             return 2;
-        } else if (this.percentage > 40){
+        } else if (this.percentage >= 2){
             return 3;
-        } else if (this.percentage > 20){
+        } else if (this.percentage >= 1){
             return 4;
         } else {
             return 5;

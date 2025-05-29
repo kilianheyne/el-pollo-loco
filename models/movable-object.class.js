@@ -42,15 +42,6 @@ class MovableObject extends DrawableObject {
         this.x -= this.speed;
     }
 
-    // applyGravity (){
-    //     setInterval(() => {
-    //         if (this.isAboveGround() || this.speedY > 0){
-    //             this.y -= this.speedY;
-    //             this.speedY -= this.acceleration;
-    //         }
-    //     }, 1000 / 60);
-    // }
-
     applyGravity = () => {
         if (this.isAboveGround() || this.speedY > 0){
             this.y -= this.speedY;
@@ -78,12 +69,6 @@ class MovableObject extends DrawableObject {
         this.deletionCounter = 30;
     }
 
-    // hitByBottle(){
-    //     this.loadImage(ImageHub.chicken.dead);
-    //     this.stopChicken();
-    //     this.markedForDeletion = true; // Flag, zum Entfernen des Sprites vom Canvas
-    // }
-
     stopChicken(){
         this.speed = 0; //interrupts movement to the left
         clearInterval(this.walkInterval); //interrupts animation
@@ -107,7 +92,7 @@ class MovableObject extends DrawableObject {
     }
 
     hit(){
-        this.health -= 15; // this.movableObject.damage - Leben wird bei Kontakt reduziert
+        this.health -= 10; // this.movableObject.damage - Leben wird bei Kontakt reduziert
         if (this.health < 0){
             this.health = 0; // Leben kann nicht unter 0 fallen (negative Werte könnten die Death-Animation unterbinden)
         } else {

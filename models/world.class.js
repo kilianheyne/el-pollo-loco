@@ -172,14 +172,16 @@ class World {
             let bottle = this.throwableObjects[i];
             if (bottle.enemyHitted && bottle.splashAnimated){
                 this.throwableObjects.splice(i, 1);
-                i--
+                i--;
             } else {
                 for (let j = 0; j < this.level.enemies.length; j++){
                     let enemy = this.level.enemies[j];
-                    if (bottle.isColliding(enemy)){
+                    if (bottle.isColliding(enemy) && !bottle.enemyHitted){
+                        bottle.enemyHitted = true;
                         console.log('Bottle hit an enemy!');
                         if (enemy instanceof Endboss){
                             enemy.gotHit();
+                            this.statusbar.boss.setHealth(this.endboss.health)
                         } else {
                             enemy.hitOnChicken();
                         }
