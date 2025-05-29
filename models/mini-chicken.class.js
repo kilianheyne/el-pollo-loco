@@ -1,4 +1,4 @@
-class Chicken extends MovableObject{
+class MiniChicken extends MovableObject{
     // #region attributes
     y = 360;
     width = 80;
@@ -16,7 +16,7 @@ class Chicken extends MovableObject{
     constructor(){
         super();
         
-        this.loadImages(ImageHub.chicken.walk);
+        this.loadImages(ImageHub.smallChicken.walk);
         this.x = 200 + Math.random() * 500;
         this.speed = 0.06 + Math.random() * 0.25;
 
@@ -27,7 +27,7 @@ class Chicken extends MovableObject{
     // #region methods
 
     animateWalk = () => {
-        this.playAnimation(ImageHub.chicken.walk);
+        this.playAnimation(ImageHub.smallChicken.walk);
     }
 
     animateMovement = () => {

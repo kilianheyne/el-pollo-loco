@@ -63,7 +63,11 @@ class MovableObject extends DrawableObject {
     }
 
     hitOnChicken(){
-        this.loadImage(ImageHub.chicken.dead);
+        if (this instanceof Chicken){
+            this.loadImage(ImageHub.chicken.dead);
+        } else if (this instanceof MiniChicken){
+            this.loadImage(ImageHub.smallChicken.dead);
+        }
         this.stopChicken();
         this.markedForDeletion = true; // Flag, zum Entfernen des Sprites vom Canvas
         this.deletionCounter = 30;
