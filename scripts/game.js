@@ -1,10 +1,29 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+const startScreen = document.getElementById('start-screen');
 
 function init(){
     canvas = document.getElementById('canvas');
+    showStartScreen();
     world = new World(canvas, keyboard);
+}
+
+function showStartScreen(){
+    startScreen.classList.remove('hidden');
+    startScreen.classList.remove('show');
+    startScreen.style.zIndex = 10;
+
+}
+
+function hideStartScreen(){
+    startScreen.classList.remove('hidden');
+    startScreen.classList.remove('show');
+    startScreen.style.zIndex = -10;
+}
+
+function startGame(){
+    hideStartScreen();
 }
 
 window.addEventListener('keydown', (event) => {

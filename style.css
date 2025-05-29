@@ -1,3 +1,6 @@
+@import url(https://fonts.bunny.net/css?family=frijole:400);
+
+
 *{
     position: relative;
     scroll-behavior: smooth;
@@ -13,9 +16,28 @@ body{
     justify-content: center;
     align-items: center;
     height: 100dvh;
+    background: url(./img/5_background/web_background.png);
+    background-size: cover;
+    background-position: center;
+    font-family: 'Frijole', display;
 }
 
-title{
+show{
+    display: flex
+}
+
+hide{
+    display: none;
+}
+
+h1{
+    
+    font-size: 48px;
+    margin-bottom: 40px;
+    padding: 10px;
+    background: orange;
+    border-radius: 11px;
+
     @media only screen and (max-width: 720px){
         display: none;
     }
@@ -23,9 +45,47 @@ title{
 
 canvas{
     background: black;
+    border-radius: 11px;
 
     @media only screen and (max-width: 720px){
         width: 100%;
         height: 100dvh;
     }
+}
+
+#key-info{
+    margin-top: 40px;
+    padding: 10px;
+    background: orange;
+    border-radius: 11px;
+}
+
+#start-screen{
+    position: absolute;
+    width: 720px;
+    height: 480px;
+    z-index: 10;
+
+    img{
+        width: 100%;
+        height: 100%;
+        border-radius: 11px;
+    }
+}
+
+#start-button{
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.btn-style{
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border: 2px solid orange;
+    border-radius: 11px;
+    background-color: yellow;
 }

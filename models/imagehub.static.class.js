@@ -179,6 +179,14 @@ class ImageHub {
         ]
     }
     // #endregion
+    static game = {
+        winning: [
+            'img/You won, you lost/You Win A.png',
+        ],
+        loosing: [
+            'img/You won, you lost/You lost b.png',
+        ],
+    }
 }
 // #endregion
 // #region IntervalHub

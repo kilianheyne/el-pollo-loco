@@ -6,6 +6,7 @@
     <title>EL POLLO LOCO</title>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./img/5_background/favicon-el-pollo-loco.png" type="image/x-icon">
 
     <script src="./models/imagehub.static.class.js"></script>
 
@@ -39,8 +40,30 @@
 <body onload="init()">
     <h1>EL POLLO LOCO</h1>
 
-    <canvas id="canvas" width="720" height="480">
-    </canvas>
+    <div id="center-container">
+        <div id="start-screen">
+            <div id="btn-container">
+                <button id="start-button" class="btn-style" onclick="startGame()">Start</button>
+            </div>
+            <img src="img/9_intro_outro_screens/start/startscreen_2.png" alt="start screen">
+        </div>
+        
+        <canvas id="canvas" width="720" height="480"></canvas>
+    </div>
+
+    
+
+    <div id="key-info">
+        <span>
+            Laufen: W & D
+        </span>
+        <span>
+            Springen: Leertaste
+        </span>
+        <span>
+            Flasche werfen: Shift
+        </span>
+    </div>
 
     
     <script src="./scripts/game.js"></script>
