@@ -21,18 +21,18 @@ class ThrowableObject extends MovableObject {
 
         this.x = x; 
         this.y = y;
+        this.throw(x, y);
         this.height = 150;
         this.width = 100;
         this.facingLeft = facingLeft;
 
         this.animateInterval = IntervalHub.setStoppableInterval(this.animate, 1000/60);
-        this.throwInterval = IntervalHub.setStoppableInterval(this.throw(x, y), 1000/60);
         this.trajectoryInterval = IntervalHub.setStoppableInterval(this.trajectory, 1000/60);
     }
     // #endregion
     // region methods
 
-    throw = (x, y) => {
+    throw(x, y){
         this.x = x;
         this.y = y;
         this.speedY = 25;
@@ -66,9 +66,9 @@ class ThrowableObject extends MovableObject {
     }
 
     stopThrowInterval(){
-        clearInterval(this.throwInterval);
-        clearInterval(this.trajectoryInterval);
-        clearInteaval(this.gravityInterval);
+        IntervalHub.stopInterval(this.throwInterval);
+        IntervalHub.stopInterval(this.trajectoryInterval);
+        IntervalHub.stopInterval(this.gravityInterval);
     }
     // #endregion
 }

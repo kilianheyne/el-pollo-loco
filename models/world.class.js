@@ -36,6 +36,8 @@ class World {
 
         this.level.enemies.forEach(enemy => enemy.world = this);
 
+        this.worldRunInterval = IntervalHub.setStoppableInterval(this.run, 1000/5);
+
     }
     // #endregion
     // #region methods
@@ -109,16 +111,14 @@ class World {
         this.character.world = this; 
     }
     
-    run(){
-        setInterval(() => {
-            this.checkChickenCollision();
-            this.checkCoinCollision();
-            this.checkSalsaCollision();
-            this.checkThrow();
-            this.checkThrowableCollision();
-            this.checkWin();
-            this.checkLoose();
-        }, 200);
+    run = () => {
+        this.checkCoinCollision();
+        this.checkSalsaCollision();
+        this.checkThrow();
+        this.checkThrowableCollision();
+        this.checkWin();
+        this.checkLoose();
+        this.checkChickenCollision();
     }
 
     checkWin(){
