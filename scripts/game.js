@@ -2,28 +2,56 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 const startScreen = document.getElementById('start-screen');
+const winScreen = document.getElementById('win-screen');
+const looseScreen = document.getElementById('loose-screen');
 
 function init(){
     canvas = document.getElementById('canvas');
     showStartScreen();
+    hideWinScreen();
+    hideLooseScreen();
     world = new World(canvas, keyboard);
 }
 
 function showStartScreen(){
-    startScreen.classList.remove('hidden');
-    startScreen.classList.remove('show');
+    startScreen.classList.remove('hide');
+    startScreen.classList.add('show');
     startScreen.style.zIndex = 10;
 
 }
 
 function hideStartScreen(){
-    startScreen.classList.remove('hidden');
+    startScreen.classList.add('hide');
     startScreen.classList.remove('show');
     startScreen.style.zIndex = -10;
 }
 
 function startGame(){
     hideStartScreen();
+}
+
+function showWinScreen(){
+    winScreen.classList.add('show');
+    winScreen.classList.remove('hide');
+    winScreen.style.zIndex = 15;
+}
+
+function hideWinScreen(){
+    winScreen.classList.add('hide');
+    winScreen.classList.remove('show');
+    winScreen.style.zIndex = -15;
+}
+
+function showLooseScreen(){
+    looseScreen.classList.add('show');
+    looseScreen.classList.remove('hide');
+    looseScreen.style.zIndex = 15;
+}
+
+function hideLooseScreen(){
+    looseScreen.classList.add('hide');
+    looseScreen.classList.remove('show');
+    looseScreen.style.zIndex = -15;
 }
 
 window.addEventListener('keydown', (event) => {

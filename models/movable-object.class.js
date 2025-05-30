@@ -55,7 +55,6 @@ class MovableObject extends DrawableObject {
         } else {
             return this.y < 130; // level of the ground 
         }
-
     }
 
     jump(){

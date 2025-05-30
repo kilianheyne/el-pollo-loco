@@ -116,7 +116,23 @@ class World {
             this.checkSalsaCollision();
             this.checkThrow();
             this.checkThrowableCollision();
+            this.checkWin();
+            this.checkLoose();
         }, 200);
+    }
+
+    checkWin(){
+        if (this.endboss.isDead && this.endboss.playedDeathAnimation){
+            console.log('You won!');
+            showWinScreen();
+        }
+    }
+
+    checkLoose(){
+        if (this.character.pepeDead && this.character.deathAnimationPlayed){
+            console.log('You loose :c');
+            showLooseScreen();
+        }
     }
 
     checkChickenCollision(){

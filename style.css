@@ -22,16 +22,15 @@ body{
     font-family: 'Frijole', display;
 }
 
-show{
+.show{
     display: flex
 }
 
-hide{
+.hide{
     display: none;
 }
 
 h1{
-    
     font-size: 48px;
     margin-bottom: 40px;
     padding: 10px;
@@ -54,6 +53,8 @@ canvas{
 }
 
 #key-info{
+    display: flex;
+    flex-direction: column;
     margin-top: 40px;
     padding: 10px;
     background: orange;
@@ -88,4 +89,38 @@ canvas{
     border: 2px solid orange;
     border-radius: 11px;
     background-color: yellow;
+}
+
+#win-screen{
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    width: 720px;
+    height: 480px;
+    z-index: 15;
+    background: #a1220b;
+    border-radius: 11px;
+    padding: 100px;
+
+    img{
+        object-fit: contain;
+        width: 100%;
+    }
+}
+
+#loose-screen{
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    width: 720px;
+    height: 480px;
+    z-index: 15;
+    background: #a1220b;
+    border-radius: 11px;
+    padding: 100px;
+
+    img{
+        object-fit: contain;
+        width: 100%;
+    }
 }

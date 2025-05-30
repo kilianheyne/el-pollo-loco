@@ -17,6 +17,9 @@ class Character extends MovableObject{
         left: 20
     };
 
+    pepeDead = false;
+    deathAnimationPlayed = false;
+
     // #endregion
     // #region constructor
     constructor(){
@@ -70,6 +73,8 @@ class Character extends MovableObject{
         setInterval(() => { 
             if (this.isDead()){ // dying animation
                 this.playAnimation(ImageHub.pepe.dead);
+                this.pepeDead = true;
+                this.deathAnimationPlayed = true;
                 this.resetLongIdleTimer();
             } else if (this.isHurt()){ // hurt animation
                 this.playAnimation(ImageHub.pepe.hurt);
