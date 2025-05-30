@@ -1,23 +1,23 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+
 const startScreen = document.getElementById('start-screen');
 const winScreen = document.getElementById('win-screen');
 const looseScreen = document.getElementById('loose-screen');
 
 function init(){
     canvas = document.getElementById('canvas');
+    initLevel();
     showStartScreen();
     hideWinScreen();
     hideLooseScreen();
-    world = new World(canvas, keyboard);
 }
 
 function showStartScreen(){
     startScreen.classList.remove('hide');
     startScreen.classList.add('show');
     startScreen.style.zIndex = 10;
-
 }
 
 function hideStartScreen(){
@@ -28,6 +28,15 @@ function hideStartScreen(){
 
 function startGame(){
     hideStartScreen();
+    world = new World(canvas, keyboard);
+}
+
+function restartGame(){
+    IntervalHub.stopEveryInterval();
+    initLevel();
+    world = new World(canvas, keyboard);
+    hideWinScreen();
+    hideLooseScreen();
 }
 
 function showWinScreen(){

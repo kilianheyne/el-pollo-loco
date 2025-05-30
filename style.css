@@ -1,6 +1,5 @@
 @import url(https://fonts.bunny.net/css?family=frijole:400);
 
-
 *{
     position: relative;
     scroll-behavior: smooth;
@@ -76,9 +75,8 @@ canvas{
 
 #start-button{
     position: absolute;
-    top: 0;
-    right: 0;
-    transform: translateX(-50%);
+    top: 20px;
+    left: 400px;
     z-index: 10;
 }
 

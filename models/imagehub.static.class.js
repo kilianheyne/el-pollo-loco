@@ -1,4 +1,3 @@
-// #region ImageHub
 class ImageHub {
     // #region playable character Pepe
     static pepe = {
@@ -188,8 +187,7 @@ class ImageHub {
         ],
     }
 }
-// #endregion
-// #region IntervalHub
+
 class IntervalHub {
 
     static everyInterval = [];
@@ -208,4 +206,18 @@ class IntervalHub {
         clearInterval(fn);
     }
 }
-// #endregion
+
+class AudioHub {
+    // Audiodateien
+    static backgroundMusic;
+
+    // Array, dass alle Sounds enthält
+    static allSounds = [];
+
+    // abspielen von einem Sound
+    static playSound(sound){
+        sound.volume = 0.2;
+        sound.currentTime = 0;
+        sound.play();
+    }
+}

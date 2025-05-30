@@ -12,7 +12,7 @@ class Cloud extends DrawableObject{
         this.x = Math.random() * 500; // zufällige Positionierung auf der x-Koordinate
         this.animate(); // führt die Funktion animate() aus, welche dafür sorgt, das sich die Wolke langsam nach links bewegt
     
-        IntervalHub.setStoppableInterval(this.animate, 1000/60);
+        this.cloudMoveInterval = IntervalHub.setStoppableInterval(this.animate, 1000/60);
     }
     // #endregion
     // #region methods
@@ -22,6 +22,10 @@ class Cloud extends DrawableObject{
 
     moveLeft(){ //moving left
         this.x -= this.speed;
+    }
+
+    stopCloudInterval(){
+        IntervalHub.stopInterval(this.cloudMoveInterval);
     }
     // #endregion
 }

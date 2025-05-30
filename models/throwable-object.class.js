@@ -21,43 +21,31 @@ class ThrowableObject extends MovableObject {
 
         this.x = x; 
         this.y = y;
-        this.throw(x, y);
         this.height = 150;
         this.width = 100;
         this.facingLeft = facingLeft;
 
-        IntervalHub.setStoppableInterval(this.animate, 1000/60);
-        //this.throwInterval = IntervalHub.setStoppableInterval(this.throw(x, y), 1000/60);
+        this.animateInterval = IntervalHub.setStoppableInterval(this.animate, 1000/60);
+        this.throwInterval = IntervalHub.setStoppableInterval(this.throw(x, y), 1000/60);
+        this.trajectoryInterval = IntervalHub.setStoppableInterval(this.trajectory, 1000/60);
     }
     // #endregion
     // region methods
-    throw (x, y){
+
+    throw = (x, y) => {
         this.x = x;
-        this.y = y; 
+        this.y = y;
         this.speedY = 25;
         this.applyGravity();
-
-        this.throwInterval = setInterval(() => {
-            if (this.facingLeft){
-                this.x -= 12;
-            } else {
-                this.x += 12;
-            }
-        }, 1000 / 59)
     }
 
-    // throw = (x, y) => {
-    //     this.x = x;
-    //     this.y = y;
-    //     this.speedY = 25;
-    //     this.applyGravity();
-
-    //     if (this.facingLeft){
-    //         this.x -= 12;
-    //     } else {
-    //         this.x += 12;
-    //     }
-    // }
+    trajectory = () => {
+        if (this.facingLeft){
+            this.x -= 12;
+        } else {
+            this.x += 12;
+        }
+    }
 
     animate = () => {
         this.getRealFrame();
@@ -69,13 +57,18 @@ class ThrowableObject extends MovableObject {
     splash(){
         this.enemyHitted = true;
         this.speedY = 0;
-        clearInterval(this.throwInterval);
-        clearInterval(this.gravityInterval);
+        this.stopThrowInterval();
         this.playAnimation(ImageHub.salsabottle.splash);
 
         setTimeout(() => {
             this.splashAnimated = true;
         }, 400);
+    }
+
+    stopThrowInterval(){
+        clearInterval(this.throwInterval);
+        clearInterval(this.trajectoryInterval);
+        clearInteaval(this.gravityInterval);
     }
     // #endregion
 }

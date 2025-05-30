@@ -14,7 +14,7 @@ class MovableObject extends DrawableObject {
     constructor(){
         super();
 
-        IntervalHub.setStoppableInterval(this.deletionCountdown, 1000/30);
+        this.deletionInterval = IntervalHub.setStoppableInterval(this.deletionCountdown, 1000/30);
         this.gravityInterval = IntervalHub.setStoppableInterval(this.applyGravity, 1000/60)
         //
     }
@@ -74,8 +74,7 @@ class MovableObject extends DrawableObject {
 
     stopChicken(){
         this.speed = 0; //interrupts movement to the left
-        clearInterval(this.walkInterval); //interrupts animation
-        clearInterval(this.moveInterval);
+        this.stopChickenInterval(); //interrupts animation
     }
 
     deletionCountdown = () => {

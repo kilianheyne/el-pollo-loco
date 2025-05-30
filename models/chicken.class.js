@@ -35,5 +35,10 @@ class Chicken extends MovableObject{
         this.getRealFrame();
     }
 
+    stopChickenInterval(){
+        IntervalHub.stopInterval(this.walkInterval);
+        IntervalHub.stopInterval(this.moveInterval);
+    }
+
     // #endregion
 }

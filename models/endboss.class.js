@@ -26,7 +26,7 @@ class Endboss extends MovableObject {
         this.loadImages(ImageHub.endboss.attack);
         this.loadImages(ImageHub.endboss.hurt);
         this.loadImages(ImageHub.endboss.dead);
-        IntervalHub.setStoppableInterval(this.animateWalk, 1000 / 5);
+        this.endbossWalkInterval = IntervalHub.setStoppableInterval(this.animateWalk, 1000 / 5);
     }
     // #endregion
     // #region methods
@@ -52,6 +52,10 @@ class Endboss extends MovableObject {
         this.isDead =  true;
         this.playAnimation(ImageHub.endboss.dead);
         this.playedDeathAnimation = true;
+    }
+
+    stopEndbossInterval(){
+        IntervalHub.stopInterval(endbossWalkInterval);
     }
     // #endregion
 }
