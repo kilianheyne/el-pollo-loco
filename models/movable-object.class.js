@@ -20,11 +20,18 @@ class MovableObject extends DrawableObject {
     }
     // #region methods
 
+    // isColliding(movableObject){
+    //     return this.rX + this.rWidth > movableObject.rX &&
+    //         this.rY + this.rHeight > movableObject.rY &&
+    //         this.rX < movableObject.rX &&
+    //         this.rY < movableObject.rY + movableObject.rHeight
+    // }
+
     isColliding(movableObject){
-        return this.rX + this.rWidth > movableObject.rX &&
-            this.rY + this.rHeight > movableObject.rY &&
-            this.rX < movableObject.rX &&
-            this.rY < movableObject.rY + movableObject.rHeight
+        return this.rX < movableObject.rX + movableObject.rWidth &&
+                this.rX + this.rWidth > movableObject.rX &&
+                this.rY < movableObject.rY + movableObject.rHeight &&
+                this.rY + this.rHeight > movableObject.rY;
     }
 
     playAnimation(images){ //iterates through an array of pictures to simulate an animation
@@ -46,6 +53,8 @@ class MovableObject extends DrawableObject {
         if (this.isAboveGround() || this.speedY > 0){
             this.y -= this.speedY;
             this.speedY -= this.acceleration;
+        } else {
+            this.speedY = 0; // speedy stays 0 to avoid "walking" jump kills
         }
     }
 

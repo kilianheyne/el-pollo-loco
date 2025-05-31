@@ -43,16 +43,21 @@ class World {
     // #region methods
     draw(){ // zeichnet alles auf unser Canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); //löscht erstmal alle vorhandenen Inhalte auf dem Canvas
-
         this.ctx.translate(this.camera_x, 0); // 
-
+        // Hintergrund-Grafiken
         this.addArrayToCanvas(this.level.backgroundObjects); //Hintergrund
         this.addArrayToCanvas(this.level.clouds); //Wolken
+        // Gegner-Grafiken
+        this.addArrayToCanvas(this.level.enemies); // alle Arten von Gegner
+        // Collectables
         this.addArrayToCanvas(this.throwableObjects);
         this.addArrayToCanvas(this.level.coins);
         this.addArrayToCanvas(this.level.bottles);
-        this.addToCanvas(this.character); //main character 
+        // Spielcharakter
+        this.addToCanvas(this.character); //main character
+        
         this.ctx.translate(-this.camera_x, 0);
+        // Statusbars
         // ---- space for fixed objects ----
         this.addToCanvas(this.statusbar.health); //health bar
         this.addToCanvas(this.statusbar.coins); //coin bar
@@ -62,7 +67,7 @@ class World {
         }
         this.ctx.translate(this.camera_x, 0);
         // ---- end for fixed objects ----
-        this.addArrayToCanvas(this.level.enemies); //Hühnchen
+        
         this.ctx.translate(-this.camera_x, 0);
         
         let self = this;
@@ -119,6 +124,7 @@ class World {
         this.checkWin();
         this.checkLoose();
         this.checkChickenCollision();
+        console.log(this.character.speedY);
     }
 
     checkWin(){
@@ -139,7 +145,10 @@ class World {
         for (let i = 0; i < this.level.enemies.length; i++){
             let enemy = this.level.enemies[i];
             if (this.character.isColliding(enemy)){
-                if (this.character.isColliding(enemy) && this.character.speedY < -23){
+                // if (this.character.isColliding(enemy) && this.character.speedY < 0){
+                //  this.character.y + this.character.height <= enemy.y + 10
+                // this.character.isColliding(enemy) && this.character.speedY > 0 && this.character.y + this.character.height <= enemy.y + 25
+                if (this.character.isColliding(enemy) && this.character.speedY < 0){
                     enemy.hitOnChicken();
                     this.character.jump();
                 } else {
