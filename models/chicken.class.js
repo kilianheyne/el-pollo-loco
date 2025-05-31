@@ -17,7 +17,7 @@ class Chicken extends MovableObject{
         super();
         
         this.loadImages(ImageHub.chicken.walk);
-        this.x = 200 + Math.random() * 500;
+        this.x = 200 + Math.random() * 2000;
         this.speed = 0.06 + Math.random() * 0.25;
 
         this.walkInterval = IntervalHub.setStoppableInterval(this.animateWalk, 1000/5);

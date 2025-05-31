@@ -24,6 +24,7 @@ class World {
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.endboss = this.level.enemies.find(e => e instanceof Endboss);
+        this.endboss.world = this;
 
         this.draw(); //beim Erstellen der Welt wird draw ausgeführt!
         this.setWorld();
@@ -37,43 +38,52 @@ class World {
         this.level.enemies.forEach(enemy => enemy.world = this);
 
         this.worldRunInterval = IntervalHub.setStoppableInterval(this.run, 1000/5);
-
     }
     // #endregion
     // #region methods
     draw(){ // zeichnet alles auf unser Canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); //löscht erstmal alle vorhandenen Inhalte auf dem Canvas
         this.ctx.translate(this.camera_x, 0); // 
-        // Hintergrund-Grafiken
+        this.drawBackground();
+        this.drawEnemies();
+        this.drawCollectables();
+        this.drawChar();
+        this.ctx.translate(-this.camera_x, 0);
+        this.drawUI();
+        this.ctx.translate(this.camera_x, 0);
+        this.ctx.translate(-this.camera_x, 0);
+        let self = this;
+        requestAnimationFrame(function() { //requestAnimationFrame benötigt eine (anonyme) Funktion, Ausführung erfolgt, sobald alles oberhalb abgeschlossen ist (async?)
+            self.draw(); //this ist für die Funktion nicht mehr bekannt, deshalb Zuweisung mit self = this
+        });
+    }
+
+    drawBackground(){
         this.addArrayToCanvas(this.level.backgroundObjects); //Hintergrund
         this.addArrayToCanvas(this.level.clouds); //Wolken
-        // Gegner-Grafiken
+    }
+
+    drawEnemies(){
         this.addArrayToCanvas(this.level.enemies); // alle Arten von Gegner
-        // Collectables
+    }
+
+    drawCollectables(){
         this.addArrayToCanvas(this.throwableObjects);
         this.addArrayToCanvas(this.level.coins);
         this.addArrayToCanvas(this.level.bottles);
-        // Spielcharakter
+    }
+
+    drawChar(){
         this.addToCanvas(this.character); //main character
-        
-        this.ctx.translate(-this.camera_x, 0);
-        // Statusbars
-        // ---- space for fixed objects ----
+    }
+
+    drawUI(){
         this.addToCanvas(this.statusbar.health); //health bar
         this.addToCanvas(this.statusbar.coins); //coin bar
         this.addToCanvas(this.statusbar.bottles); //bottles bar
         if (this.character.x > this.endboss.x - this.canvas.width + 200 && !this.endboss.isDead){
             this.addToCanvas(this.statusbar.boss); //boss health bar
         }
-        this.ctx.translate(this.camera_x, 0);
-        // ---- end for fixed objects ----
-        
-        this.ctx.translate(-this.camera_x, 0);
-        
-        let self = this;
-        requestAnimationFrame(function() { //requestAnimationFrame benötigt eine (anonyme) Funktion, Ausführung erfolgt, sobald alles oberhalb abgeschlossen ist (async?)
-            self.draw(); //this ist für die Funktion nicht mehr bekannt, deshalb Zuweisung mit self = this
-        });
     }
 
     addToCanvas(movableObject){

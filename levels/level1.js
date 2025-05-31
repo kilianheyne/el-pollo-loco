@@ -49,10 +49,10 @@ function initLevel(){
         //bottles
         [
             new Salsabottle(400),
-            new Salsabottle(600),
             new Salsabottle(800),
-            new Salsabottle(1000),
-            new Salsabottle(1200)
+            new Salsabottle(1200),
+            new Salsabottle(1600),
+            new Salsabottle(2000)
         ]
     );
 }

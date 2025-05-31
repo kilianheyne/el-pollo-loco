@@ -1,6 +1,6 @@
 class Endboss extends MovableObject {
     // #region attributes
-    x = 1600;
+    x = 2600;
     width = 300; 
     height = 340;
     y = 110;
@@ -9,6 +9,7 @@ class Endboss extends MovableObject {
     health = 5; 
     isDead = false; // flag for health bar
     playedDeathAnimation = false;
+    hadFirstContact = false;
 
     offset = {
         top: 60,
@@ -27,6 +28,7 @@ class Endboss extends MovableObject {
         this.loadImages(ImageHub.endboss.hurt);
         this.loadImages(ImageHub.endboss.dead);
         this.endbossWalkInterval = IntervalHub.setStoppableInterval(this.animateWalk, 1000 / 5);
+        //this.endbossIntroInterval = IntervalHub.setStoppableInterval(this.animateIntro, 1000 / 5);
     }
     // #endregion
     // #region methods
@@ -36,6 +38,22 @@ class Endboss extends MovableObject {
             this.playAnimation(ImageHub.endboss.walk)
         }
         this.getRealFrame();
+    }
+
+    animateIntro = () => {
+        let i = 0;
+        if (i < ImageHub.endboss.walk.length){
+            this.playAnimation(ImageHub.endboss.walk);
+            console.log('Endboss walks');
+        } else {
+            this.playAnimation(ImageHub.endboss.alert);
+            console.log('Endboss is alert');
+        }
+        i++;
+        if (this.world.character.x > 2200 && !this.hadFirstContact){
+            i = 0;
+            hadFirstContact = true;
+        }
     }
 
     gotHit(){
