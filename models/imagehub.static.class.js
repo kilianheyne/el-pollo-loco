@@ -200,6 +200,7 @@ class IntervalHub {
 
     static stopEveryInterval(){
         IntervalHub.everyInterval.forEach(clearInterval);
+        IntervalHub.everyInterval = [];
     }
 
     static stopInterval(fn){
@@ -219,5 +220,26 @@ class AudioHub {
         sound.volume = 0.2;
         sound.currentTime = 0;
         sound.play();
+    }
+    
+    // Abspielen stoppen
+    static stopAll(){
+        AudioHub.allSounds.forEach(sound => {
+            sound.pause();
+        });
+        //document.getElementById('volume').value = 0.2;
+    }
+
+    // Abspielen von einem Sound stoppen
+    static stopOneSound(){
+        sound.pause();
+    }
+
+    // Lautstärke regeln
+    static setVolume(volumeSlider){
+        let volumeValue = document.getElementById('volume').ariaValueMax;
+        volumeSlider.forEach(sound => {
+            sound.volume = volumeValue;
+        })
     }
 }

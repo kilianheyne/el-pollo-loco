@@ -51,6 +51,16 @@ canvas{
     }
 }
 
+#game-settings{
+    display: flex;
+    justify-content: space-between;
+    width: 720px;
+    margin-top: 40px;
+    padding: 10px;
+    background: orange;
+    border-radius: 11px;
+}
+
 #key-info{
     display: flex;
     flex-direction: column;
@@ -74,19 +84,32 @@ canvas{
 }
 
 #start-button{
-    position: absolute;
-    top: 20px;
-    left: 400px;
     z-index: 10;
 }
 
 .btn-style{
-    padding: 10px 20px;
-    font-size: 18px;
     cursor: pointer;
-    border: 2px solid orange;
+    background: linear-gradient(to bottom, #f7b733, #fc4a1a);
+    color: #fff;
+    padding: 12px 24px;
+    border: 4px solid #b04a1d;
     border-radius: 11px;
-    background-color: yellow;
+    box-shadow: 0 6px 0 #89240f, 0 8px 15px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 18px;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-style:hover{
+    background: linear-gradient(to bottom, #fc4a1a, #f7b733);
+    box-shadow: 0 4px 0 #89240f, 0 6px 12px rgba(0, 0, 0, 0.25);
+    transform: translateY(2px);
+}
+
+.btn-style:active{
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #89240f;
 }
 
 #win-screen{

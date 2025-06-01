@@ -32,7 +32,6 @@ function startGame(){
 }
 
 function restartGame(){
-    IntervalHub.stopEveryInterval();
     initLevel();
     world = new World(canvas, keyboard);
     hideWinScreen();
@@ -43,6 +42,7 @@ function showWinScreen(){
     winScreen.classList.add('show');
     winScreen.classList.remove('hide');
     winScreen.style.zIndex = 15;
+    IntervalHub.stopEveryInterval();
 }
 
 function hideWinScreen(){
@@ -55,6 +55,7 @@ function showLooseScreen(){
     looseScreen.classList.add('show');
     looseScreen.classList.remove('hide');
     looseScreen.style.zIndex = 15;
+    IntervalHub.stopEveryInterval();
 }
 
 function hideLooseScreen(){
