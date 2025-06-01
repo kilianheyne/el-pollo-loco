@@ -214,6 +214,10 @@ class AudioHub {
     static win = new Audio('./audio/win-screen.mp3');
     static loose = new Audio('./audio/loose-screen.mp3');
     static click = new Audio('./audio/mouseclick.mp3');
+    static charHurt = new Audio('./audio/char-hurt.mp3');
+    static charDying = new Audio('./audio/char-dying.mp3');
+    static chickenHurt = new Audio('./audio/chicken-hurt.mp3');
+    static throwBottle = new Audio('./audio/throw-bottle.mp3');
 
     // Array, dass alle Sounds enthält
     static allSounds = [
@@ -221,7 +225,10 @@ class AudioHub {
         AudioHub.win,
         AudioHub.loose,
         AudioHub.click,
-
+        AudioHub.charHurt,
+        AudioHub.charDying,
+        AudioHub.chickenHurt,
+        AudioHub.throwBottle,
     ];
 
     // abspielen von einem Sound

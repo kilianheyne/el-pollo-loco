@@ -67,6 +67,10 @@ function hideLooseScreen(){
     looseScreen.style.zIndex = -15;
 }
 
+function mouseClick(){
+    AudioHub.playSound(AudioHub.click);
+}
+
 window.addEventListener('keydown', (event) => {
     if(event.code == "KeyW"){
         keyboard.UP = true;

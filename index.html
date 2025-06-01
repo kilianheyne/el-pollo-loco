@@ -57,11 +57,11 @@
     </div>
 
     <div id="game-settings">
-        <button class="btn-style">&#9432;</button>
-        <button id="start-button" class="btn-style" onclick="startGame(), initLevel()">Start</button>
+        <button class="btn-style" onclick="mouseClick()">&#9432;</button>
+        <button id="start-button" class="btn-style" onclick="startGame(), initLevel(), mouseClick()">Start</button>
         <div>
-            <input type="range" oninput="AudioHub.setVolume(AudioHub.allSounds)" id="volume" min="0" max="1" step="0.01" value="0.2">
-            <button class="btn-style" onclick="AudioHub.stopAll()">&#x1f50a;</button>
+            <input type="range" oninput="AudioHub.setVolume(AudioHub.allSounds), mouseClick()" id="volume" min="0" max="1" step="0.01" value="0.2">
+            <button class="btn-style" onclick="AudioHub.stopAll(), mouseClick()">&#x1f50a;</button>
         </div>
     </div>
 

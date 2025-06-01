@@ -37,6 +37,7 @@ class ThrowableObject extends MovableObject {
         this.y = y;
         this.speedY = 25;
         this.applyGravity();
+        AudioHub.playSound(AudioHub.throwBottle);
     }
 
     trajectory = () => {
