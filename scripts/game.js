@@ -29,6 +29,7 @@ function hideStartScreen(){
 function startGame(){
     hideStartScreen();
     world = new World(canvas, keyboard);
+    AudioHub.playSound(AudioHub.backgroundMusic);
 }
 
 function restartGame(){
@@ -43,6 +44,7 @@ function showWinScreen(){
     winScreen.classList.remove('hide');
     winScreen.style.zIndex = 15;
     IntervalHub.stopEveryInterval();
+    AudioHub.playSound(AudioHub.win);
 }
 
 function hideWinScreen(){
@@ -56,6 +58,7 @@ function showLooseScreen(){
     looseScreen.classList.remove('hide');
     looseScreen.style.zIndex = 15;
     IntervalHub.stopEveryInterval();
+    AudioHub.playSound(AudioHub.loose);
 }
 
 function hideLooseScreen(){

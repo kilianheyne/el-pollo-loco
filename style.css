@@ -112,6 +112,14 @@ canvas{
     box-shadow: 0 2px 0 #89240f;
 }
 
+#volume{
+    width: 250px;
+    height: 14px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) inset;
+    border-radius: 11px;
+    cursor: pointer;
+}
+
 #win-screen{
     flex-direction: column;
     justify-content: center;

@@ -210,10 +210,19 @@ class IntervalHub {
 
 class AudioHub {
     // Audiodateien
-    static backgroundMusic;
+    static backgroundMusic = new Audio('./audio/backgroundmusic.mp3');
+    static win = new Audio('./audio/win-screen.mp3');
+    static loose = new Audio('./audio/loose-screen.mp3');
+    static click = new Audio('./audio/mouseclick.mp3');
 
     // Array, dass alle Sounds enthält
-    static allSounds = [];
+    static allSounds = [
+        AudioHub.backgroundMusic,
+        AudioHub.win,
+        AudioHub.loose,
+        AudioHub.click,
+
+    ];
 
     // abspielen von einem Sound
     static playSound(sound){
@@ -227,7 +236,7 @@ class AudioHub {
         AudioHub.allSounds.forEach(sound => {
             sound.pause();
         });
-        //document.getElementById('volume').value = 0.2;
+        document.getElementById('volume').value = 0.2;
     }
 
     // Abspielen von einem Sound stoppen
@@ -237,7 +246,7 @@ class AudioHub {
 
     // Lautstärke regeln
     static setVolume(volumeSlider){
-        let volumeValue = document.getElementById('volume').ariaValueMax;
+        let volumeValue = document.getElementById('volume').value;
         volumeSlider.forEach(sound => {
             sound.volume = volumeValue;
         })

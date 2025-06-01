@@ -61,7 +61,7 @@
         <button id="start-button" class="btn-style" onclick="startGame(), initLevel()">Start</button>
         <div>
             <input type="range" oninput="AudioHub.setVolume(AudioHub.allSounds)" id="volume" min="0" max="1" step="0.01" value="0.2">
-            <button class="btn-style">&#x1f50a;</button>
+            <button class="btn-style" onclick="AudioHub.stopAll()">&#x1f50a;</button>
         </div>
     </div>
 
