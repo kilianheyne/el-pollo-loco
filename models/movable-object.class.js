@@ -13,7 +13,6 @@ class MovableObject extends DrawableObject {
 
     constructor(){
         super();
-
         this.deletionInterval = IntervalHub.setStoppableInterval(this.deletionCountdown, 1000/30);
         this.gravityInterval = IntervalHub.setStoppableInterval(this.applyGravity, 1000/60)
         //
@@ -51,11 +50,9 @@ class MovableObject extends DrawableObject {
 
     applyGravity = () => {
         if (this.isAboveGround() || this.speedY > 0){
-            //console.log('Character falls');
             this.y -= this.speedY;
             this.speedY -= this.acceleration;
         } else {
-            //console.log('Character is on the ground');
             this.speedY = 0; // speedy stays 0 to avoid "walking" jump kills
         }
     }

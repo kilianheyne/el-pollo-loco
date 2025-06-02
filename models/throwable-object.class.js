@@ -1,6 +1,9 @@
 class ThrowableObject extends MovableObject {
     // #region attributes
 
+    height = 150;
+    width = 100;
+
     enemyHitted = false;
     splashAnimated = false;
 
@@ -22,8 +25,6 @@ class ThrowableObject extends MovableObject {
         this.x = x; 
         this.y = y;
         this.throw(x, y);
-        this.height = 150;
-        this.width = 100;
         this.facingLeft = facingLeft;
 
         this.animateInterval = IntervalHub.setStoppableInterval(this.animate, 1000/60);

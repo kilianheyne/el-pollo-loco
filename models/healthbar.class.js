@@ -1,12 +1,13 @@
 class HealthBar extends Statusbar {
     // #region attributes 
     percentage = 100;
+
+    x = 20;
     // #endregion
     // #region constructor
     constructor (){
         super();
         this.loadImages(ImageHub.statusbar.health);
-        this.x = 20;
         this.setHealth(100);
     }
     // #endregion

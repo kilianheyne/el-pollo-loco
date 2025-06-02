@@ -1,11 +1,10 @@
 class Endboss extends MovableObject {
     // #region attributes
     x = 2600;
+    y = 110;
     width = 300; 
     height = 340;
-    y = 110;
-
-
+    
     health = 5; 
     isDead = false; // flag for health bar
     playedDeathAnimation = false;
@@ -27,6 +26,7 @@ class Endboss extends MovableObject {
         this.loadImages(ImageHub.endboss.attack);
         this.loadImages(ImageHub.endboss.hurt);
         this.loadImages(ImageHub.endboss.dead);
+
         this.endbossWalkInterval = IntervalHub.setStoppableInterval(this.animateWalk, 1000 / 5);
         //this.endbossIntroInterval = IntervalHub.setStoppableInterval(this.animateIntro, 1000 / 5);
     }

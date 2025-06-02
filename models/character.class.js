@@ -1,5 +1,5 @@
 class Character extends MovableObject{
-    // #region attributes
+    //#region attributes
     width = 120;
     height = 300;
     y = 0;
@@ -20,11 +20,11 @@ class Character extends MovableObject{
     pepeDead = false;
     deathAnimationPlayed = false;
 
-    // #endregion
-    // #region constructor
+    //#endregion
+    //#region constructor
     constructor(){
-        super().loadImage('img/2_character_pepe/2_walk/W-21.png');
-
+        super();
+        this.loadImage('img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(ImageHub.pepe.idle);
         this.loadImages(ImageHub.pepe.longIdle);
         this.loadImages(ImageHub.pepe.walk);
@@ -38,8 +38,8 @@ class Character extends MovableObject{
         this.charMoveInterval = IntervalHub.setStoppableInterval(this.movement, 1000/60);
         this.charInteractionInterval = IntervalHub.setStoppableInterval(this.animation, 1000/8);
     }
-    // #endregion
-    // #region methods
+    //#endregion
+    //#region methods
 
     resetLongIdleTimer(){
         clearTimeout(this.longIdleTimeout); //Timer wird auf 0 gesetzt
@@ -51,6 +51,8 @@ class Character extends MovableObject{
             }
         }, 10000)
     }
+
+    //#region movement
 
     movement = () => {
         this.charMoveRight();
@@ -80,6 +82,8 @@ class Character extends MovableObject{
         }
     }
 
+    //#endregion
+    //#region animations
     animation = () => {
         if (this.isDead()){ // dying animation
             this.charDying();
@@ -120,5 +124,6 @@ class Character extends MovableObject{
     charDoNothing(){
         this.playAnimation(ImageHub.pepe.longIdle);
     }
+    //#endregion
     // #endregion 
 }

@@ -1,10 +1,10 @@
 class BottleBar extends Statusbar {
-
+    
+    x = 480;
 
     constructor (){
         super();
         this.loadImages(ImageHub.statusbar.bottle);
-        this.x = 480;
     }
 
     setBottleBar(){

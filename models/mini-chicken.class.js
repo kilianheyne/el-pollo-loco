@@ -1,8 +1,10 @@
 class MiniChicken extends MovableObject{
     // #region attributes
+    x = 200 + Math.random() * 2000;
     y = 360;
     width = 80;
     height = 80;
+    speed = 0.06 + Math.random() * 0.25;
 
     offset = {
         top: 0,
@@ -15,11 +17,7 @@ class MiniChicken extends MovableObject{
     // #region constructor
     constructor(){
         super();
-        
         this.loadImages(ImageHub.smallChicken.walk);
-        this.x = 200 + Math.random() * 2000;
-        this.speed = 0.06 + Math.random() * 0.25;
-
         this.walkInterval = IntervalHub.setStoppableInterval(this.animateWalk, 1000/5);
         this.moveInterval = IntervalHub.setStoppableInterval(this.animateMovement, 1000/60);
     }
@@ -36,8 +34,8 @@ class MiniChicken extends MovableObject{
     }
 
     stopChickenInterval(){
-        IntervalHub.stopInterval(this.walkInterval);
-        IntervalHub.stopInterval(this.moveInterval);
+        clearInterval(this.walkInterval);
+        clearInterval(this.moveInterval);
     }
 
     // #endregion

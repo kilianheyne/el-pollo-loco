@@ -1,10 +1,9 @@
 class CoinBar extends Statusbar {
-
+    x = 250;
 
     constructor (){
         super();
         this.loadImages(ImageHub.statusbar.coin);
-        this.x = 250;
     }
 
     setCoinBar(){

@@ -37,7 +37,7 @@ class World {
 
         this.level.enemies.forEach(enemy => enemy.world = this);
 
-        this.worldRunInterval = IntervalHub.setStoppableInterval(this.run, 1000/5);
+        this.worldRunInterval = IntervalHub.setStoppableInterval(this.run, 1000/30);
     }
     // #endregion
     // #region methods
