@@ -42,7 +42,7 @@
     <h1>EL POLLO LOCO</h1>
 
     <div id="tilt-screen">
-        <img src="./img/tilt-phone.gif" alt="Please rotate your phone">
+        <img src="./img/0_ui/tilt-phone.gif" alt="Please rotate your phone">
     </div>
 
     <div id="center-container">
@@ -50,7 +50,7 @@
             <div id="start-screen-buttons">
                 <div id="top-btn-bar">
                     <div>
-                        <button id="controll-info" class="btn-style" onclick="mouseClick()">&#9432;</button>
+                        <button id="controll-info" class="btn-style" onclick="mouseClick(), showControlls()">&#9432;</button>
                         <button class="btn-style" onclick="mouseClick()">Impressum</button>
                     </div>
                     <div>
@@ -61,7 +61,7 @@
                     <button id="start-button" class="btn-style" onclick="startGame(), initLevel(), mouseClick()">Start</button>
                 </div>
             </div>
-            <div id="key-info">
+            <div id="key-info" class="hide">
                 <h2>Controlls</h2>
                 <span>
                     Move: W & D
@@ -81,6 +81,24 @@
         <div id="loose-screen">
             <img src="img/You won, you lost/You lost b.png" alt="loose screen">
             <button class="btn-style" onclick="restartGame()">PLAY AGAIN</button>
+        </div>
+        <div id="mobile-ui">
+            <div id="mobile-movement">
+                <button id="mo-ui-left" class="btn-style">
+                    <img src="./img/0_ui/left-ui.png" alt="left">
+                </button>
+                <button id="mo-ui-right" class="btn-style">
+                    <img src="./img/0_ui/right-ui.png" alt="right">
+                </button>
+            </div>
+            <div id="mobile-action">
+                <button id="mo-ui-throw" class="btn-style">
+                    <img src="./img/0_ui/throw-bottle-ui.png" alt="throw">
+                </button>
+                <button id="mo-ui-jump" class="btn-style">
+                    <img src="./img/0_ui/jump-ui.png" alt="jump">
+                </button>
+            </div>
         </div>
         <canvas id="canvas" width="720" height="480"></canvas>
     </div>

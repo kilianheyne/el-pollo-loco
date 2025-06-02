@@ -1,6 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let isShowing = false;
 
 const startScreen = document.getElementById('start-screen');
 const winScreen = document.getElementById('win-screen');
@@ -67,9 +68,24 @@ function hideLooseScreen(){
     looseScreen.style.zIndex = -15;
 }
 
+function showControlls(){
+    let controllsRef = document.getElementById('key-info')
+    if (!isShowing){
+        isShowing = true
+        controllsRef.classList.add('show');
+        controllsRef.classList.remove('hide');
+    } else {
+        isShowing = false;
+        controllsRef.classList.add('hide');
+        controllsRef.classList.remove('show');
+    }
+}
+
 function mouseClick(){
     AudioHub.playSound(AudioHub.click);
 }
+
+//#region controlls with keyboard
 
 window.addEventListener('keydown', (event) => {
     if(event.code == "KeyW"){
@@ -112,3 +128,20 @@ window.addEventListener('keyup', (event) => {
         keyboard.SHIFT = false;
     };
 });
+
+//#endregion
+//#region controlls with touch
+
+document.getElementById('mo-ui-left').addEventListener('touchstart', () => {keyboard.LEFT = true;});
+document.getElementById('mo-ui-left').addEventListener('touchend', () => {keyboard.LEFT = false;});
+
+document.getElementById('mo-ui-right').addEventListener('touchstart', () => {keyboard.RIGHT = true;});
+document.getElementById('mo-ui-right').addEventListener('touchend', () => {keyboard.RIGHT = false;});
+
+document.getElementById('mo-ui-throw').addEventListener('touchstart', () => {keyboard.SHIFT = true;});
+document.getElementById('mo-ui-throw').addEventListener('touchend', () => {keyboard.SHIFT = false;});
+
+document.getElementById('mo-ui-jump').addEventListener('touchstart', () => {keyboard.SPACE = true;});
+document.getElementById('mo-ui-jump').addEventListener('touchend', () => {keyboard.SPACE = false;});
+
+//#endregion
