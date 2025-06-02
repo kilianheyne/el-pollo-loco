@@ -1,5 +1,5 @@
 class World {
-    // #region attributes
+    //#region attributes
     character = new Character();
     level = level1;
     canvas;
@@ -17,8 +17,8 @@ class World {
     collectedCoins = [];
     collectedBottles = [new ThrowableObject(), new ThrowableObject(), new ThrowableObject(), new ThrowableObject()];
     throwableObjects = [];
-    // #endregion
-    // #region constructor
+    //#endregion
+    //#region constructor
     constructor(canvas, keyboard){
         this.ctx = canvas.getContext('2d'); //setzt den Zeichen-Bereich auf 2D 
         this.canvas = canvas;
@@ -39,8 +39,9 @@ class World {
 
         this.worldRunInterval = IntervalHub.setStoppableInterval(this.run, 1000/30);
     }
-    // #endregion
-    // #region methods
+    //#endregion
+    //#region methods
+    //#region drawing
     draw(){ // zeichnet alles auf unser Canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); //löscht erstmal alle vorhandenen Inhalte auf dem Canvas
         this.ctx.translate(this.camera_x, 0); // 
@@ -121,6 +122,7 @@ class World {
         //      this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height)    
         // })
     }
+    //#endregion
 
     setWorld(){
         this.character.world = this; 
@@ -147,6 +149,8 @@ class World {
             showLooseScreen();
         }
     }
+
+    //#region checkCollisions
 
     checkChickenCollision(){
         for (let i = 0; i < this.level.enemies.length; i++){
@@ -197,15 +201,6 @@ class World {
         }
     }
 
-    checkThrow(){
-        if(this.keyboard.SHIFT && this.collectedBottles.length > 0){
-            let bottle = new ThrowableObject(this.character.x, this.character.y, this.character.otherDirection);
-            this.throwableObjects.push(bottle);
-            this.collectedBottles.pop(); // entfernt eine Einheit aus dem Array
-            this.statusbar.bottles.setBottleBar(); //Statusanzeige aktualisieren
-        }
-    }
-
     checkThrowableCollision(){
         for (let i = 0; i < this.throwableObjects.length; i++){
             let bottle = this.throwableObjects[i];
@@ -227,6 +222,17 @@ class World {
                     }
                 }
             }
+        }
+    }
+
+    //#endregion
+
+    checkThrow(){
+        if(this.keyboard.SHIFT && this.collectedBottles.length > 0){
+            let bottle = new ThrowableObject(this.character.x, this.character.y, this.character.otherDirection);
+            this.throwableObjects.push(bottle);
+            this.collectedBottles.pop(); // entfernt eine Einheit aus dem Array
+            this.statusbar.bottles.setBottleBar(); //Statusanzeige aktualisieren
         }
     }
     // #endregion
