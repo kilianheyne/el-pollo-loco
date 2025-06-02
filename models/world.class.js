@@ -134,19 +134,16 @@ class World {
         this.checkWin();
         this.checkLoose();
         this.checkChickenCollision();
-        console.log(this.character.speedY);
     }
 
     checkWin(){
-        if (this.endboss.isDead && this.endboss.playedDeathAnimation){
-            console.log('You won!');
+        if (this.endboss.isDead && this.endboss.playedDeathAnimation && !this.character.pepeDead){
             showWinScreen();
         }
     }
 
     checkLoose(){
         if (this.character.pepeDead && this.character.deathAnimationPlayed){
-            console.log('You loose :c');
             showLooseScreen();
         }
     }
@@ -157,11 +154,17 @@ class World {
             if (this.character.isColliding(enemy)){
                 // if (this.character.isColliding(enemy) && this.character.speedY < 0){
                 //  this.character.y + this.character.height <= enemy.y + 10
-                // this.character.isColliding(enemy) && this.character.speedY > 0 && this.character.y + this.character.height <= enemy.y + 25
-                if (this.character.isColliding(enemy) && this.character.speedY < 0){
+                // this.character.isColliding(enemy) && this.character.rY + this.character.rHeight <= enemy.rY + 25
+                if (this.character.speedY < 0){
+                    AudioHub.playSound(AudioHub.chickenHurt);
+                    //console.log('Hit on Chicken' + `& ${this.character.rY} & ${this.character.rHeight} & ${enemy.rY}`);
+                    console.log('chicken hurt' + this.character.speedY);
                     enemy.hitOnChicken();
                     this.character.jump();
-                } else {
+                } else if (!this.character.isHurt()){ // verhindert mehrere Treffer in einem kurzem Zeitraum
+                    AudioHub.playSound(AudioHub.charHurt);
+                    //console.log('Hit on Character' + `& CharY = ${this.character.y} & CharHeight = ${this.character.height} & EnemyY = ${enemy.y}`);
+                    console.log('character hurt' + this.character.speedY);
                     this.character.hit(); 
                     this.statusbar.health.setHealth(this.character.health);
                 }
@@ -175,6 +178,7 @@ class World {
             if(this.character.isColliding(coin)){
                 this.level.coins.splice(i, 1); // gesammelte Münze wird aus dem Array entfernt
                 i--; //"neues Array" hat ja jetzt einen Wert weniger, also muss i auch kleiner werden
+                AudioHub.playSound(AudioHub.coin);
                 this.collectedCoins.push(coin); // gesammelte Münze erhöht Wert im Array und bestimmt das ausgespielte Bild
                 this.statusbar.coins.setCoinBar(); //aktualisiert, welches Bild der Statusleiste angezeigt werden soll
             }
@@ -213,7 +217,6 @@ class World {
                     let enemy = this.level.enemies[j];
                     if (bottle.isColliding(enemy) && !bottle.enemyHitted){
                         bottle.enemyHitted = true;
-                        console.log('Bottle hit an enemy!');
                         if (enemy instanceof Endboss){
                             enemy.gotHit();
                             this.statusbar.boss.setHealth(this.endboss.health)

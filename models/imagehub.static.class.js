@@ -218,6 +218,7 @@ class AudioHub {
     static charDying = new Audio('./audio/char-dying.mp3');
     static chickenHurt = new Audio('./audio/chicken-hurt.mp3');
     static throwBottle = new Audio('./audio/throw-bottle.mp3');
+    static coin = new Audio('./audio/collecting-coin.mp3');
 
     // Array, dass alle Sounds enthält
     static allSounds = [

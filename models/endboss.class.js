@@ -40,26 +40,23 @@ class Endboss extends MovableObject {
         this.getRealFrame();
     }
 
-    animateIntro = () => {
-        let i = 0;
-        if (i < ImageHub.endboss.walk.length){
-            this.playAnimation(ImageHub.endboss.walk);
-            console.log('Endboss walks');
-        } else {
-            this.playAnimation(ImageHub.endboss.alert);
-            console.log('Endboss is alert');
-        }
-        i++;
-        if (this.world.character.x > 2200 && !this.hadFirstContact){
-            i = 0;
-            hadFirstContact = true;
-        }
-    }
+    // animateIntro = () => {
+    //     let i = 0;
+    //     if (i < ImageHub.endboss.walk.length){
+    //         this.playAnimation(ImageHub.endboss.walk);
+    //     } else {
+    //         this.playAnimation(ImageHub.endboss.alert);
+    //     }
+    //     i++;
+    //     if (this.world.character.x > 2200 && !this.hadFirstContact){
+    //         i = 0;
+    //         hadFirstContact = true;
+    //     }
+    // }
 
     gotHit(){
         if (!this.isDead){
             this.health--;
-            console.log(`Endboss getroffen! Remaining health: ${this.health}`)
         }
         if (this.health <= 0){
             this.died();

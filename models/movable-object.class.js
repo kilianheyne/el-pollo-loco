@@ -51,9 +51,11 @@ class MovableObject extends DrawableObject {
 
     applyGravity = () => {
         if (this.isAboveGround() || this.speedY > 0){
+            //console.log('Character falls');
             this.y -= this.speedY;
             this.speedY -= this.acceleration;
         } else {
+            //console.log('Character is on the ground');
             this.speedY = 0; // speedy stays 0 to avoid "walking" jump kills
         }
     }
@@ -76,7 +78,6 @@ class MovableObject extends DrawableObject {
         } else if (this instanceof MiniChicken){
             this.loadImage(ImageHub.smallChicken.dead);
         }
-        AudioHub.playSound(AudioHub.chickenHurt);
         this.stopChicken();
         this.markedForDeletion = true; // Flag, zum Entfernen des Sprites vom Canvas
         this.deletionCounter = 30;

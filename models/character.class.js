@@ -101,12 +101,10 @@ class Character extends MovableObject{
         this.deathAnimationPlayed = true;
         this.resetLongIdleTimer();
         this.playAnimation(ImageHub.pepe.dead);
-        AudioHub.playSound(AudioHub.charDying);
     }
     charHurting(){
         this.resetLongIdleTimer();
         this.playAnimation(ImageHub.pepe.hurt);
-        AudioHub.playSound(AudioHub.charHurt);
     }
     charJumping(){
         this.resetLongIdleTimer(); // unterbricht die longIdle-Animation
