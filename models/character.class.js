@@ -4,7 +4,7 @@ class Character extends MovableObject{
     height = 300;
     y = 0;
     speed = 3;
-    world;
+    world; //
 
     lastActionTime = Date.now();
     londIdleTimeout;

@@ -31,6 +31,7 @@ function startGame(){
     hideStartScreen();
     world = new World(canvas, keyboard);
     AudioHub.playSound(AudioHub.backgroundMusic);
+    
 }
 
 function restartGame(){

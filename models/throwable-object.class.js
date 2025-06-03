@@ -68,9 +68,9 @@ class ThrowableObject extends MovableObject {
     }
 
     stopThrowInterval(){
-        IntervalHub.stopInterval(this.throwInterval);
-        IntervalHub.stopInterval(this.trajectoryInterval);
-        IntervalHub.stopInterval(this.gravityInterval);
+        clearInterval(this.throwInterval);
+        clearInterval(this.trajectoryInterval);
+        clearInterval(this.gravityInterval);
     }
     // #endregion
 }

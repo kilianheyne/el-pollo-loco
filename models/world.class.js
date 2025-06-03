@@ -8,6 +8,8 @@ class World {
     collectable;
     camera_x = 0;
 
+    canThrow = true; //Flasche kann nur einmal pro Tastendruck geworfen werden
+
     statusbar = {
         health: new HealthBar(),
         coins: new CoinBar(),
@@ -125,7 +127,7 @@ class World {
     //#endregion
 
     setWorld(){
-        this.character.world = this; 
+        this.character.world = this; //
     }
     
     run = () => {
@@ -228,12 +230,21 @@ class World {
     //#endregion
 
     checkThrow(){
-        if(this.keyboard.SHIFT && this.collectedBottles.length > 0){
+        if(this.keyboard.SHIFT && this.collectedBottles.length > 0 && this.canThrow){
             let bottle = new ThrowableObject(this.character.x, this.character.y, this.character.otherDirection);
             this.throwableObjects.push(bottle);
             this.collectedBottles.pop(); // entfernt eine Einheit aus dem Array
             this.statusbar.bottles.setBottleBar(); //Statusanzeige aktualisieren
+            this.handleThrowAmount();
         }
+    }
+
+    handleThrowAmount(){
+        this.canThrow = false;
+        
+        setTimeout(() => {
+            this.canThrow = true;
+        }, 600);
     }
     // #endregion
 }

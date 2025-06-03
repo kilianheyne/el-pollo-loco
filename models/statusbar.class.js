@@ -1,8 +1,7 @@
 class Statusbar extends DrawableObject {
-    constructor(){
-        super();
-        this.y = 4;
-        this.width = 200;
-        this.height = 60;
-    }
+
+    y = 4;
+    width = 200;
+    height = 60;
+
 }
