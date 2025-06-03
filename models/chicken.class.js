@@ -1,3 +1,8 @@
+/**
+ * Creates a moving chicken that poses as an enemy.
+ * It simply moves to the left and has a walk animation while moving.
+ * @class
+ */
 class Chicken extends MovableObject{
     // #region attributes
     x = 200 + Math.random() * 2000;
@@ -6,6 +11,9 @@ class Chicken extends MovableObject{
     height = 80;
     speed = 0.06 + Math.random() * 0.25;
 
+    /**
+     * Numbers to correct the hitbox of chickens.
+     */
     offset = {
         top: 0,
         right: 0,
@@ -17,6 +25,9 @@ class Chicken extends MovableObject{
 
     // #endregion
     // #region constructor
+    /**
+     * Creates a chicken and starts its movement and animation intervals.
+     */
     constructor(){
         super();
         this.loadImages(ImageHub.chicken.walk);

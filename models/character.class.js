@@ -1,15 +1,31 @@
+/**
+ * Creates the playable character that the player navigates.
+ * @class
+ */
 class Character extends MovableObject{
     //#region attributes
     width = 120;
     height = 300;
     y = 0;
     speed = 3;
-    world; //
 
+    /**
+     * Reference to the current game world, including level data and keyboard inputs.
+     * @type {World}
+     */
+    world;
+
+    /**
+     * Time of the last user action (to detect inactivity).
+     * @type {number}
+     */
     lastActionTime = Date.now();
     londIdleTimeout;
     isInLongIdle = false;
 
+    /**
+     * Numbers to correct the hitbox of character.
+     */
     offset = {
         top: 120,
         right: 30,
@@ -22,6 +38,9 @@ class Character extends MovableObject{
 
     //#endregion
     //#region constructor
+    /**
+     * Initializes the main playable character, loads all animations, applies gravity and sets up movement and interaction intervals.
+     */
     constructor(){
         super();
         this.loadImage('img/2_character_pepe/2_walk/W-21.png');
@@ -40,7 +59,10 @@ class Character extends MovableObject{
     }
     //#endregion
     //#region methods
-
+    /**
+     * Resets the long idle times. 
+     * If the player is inactive for 10 seconds, the character starts the long idle animation.
+     */
     resetLongIdleTimer(){
         clearTimeout(this.longIdleTimeout); //Timer wird auf 0 gesetzt
         this.isInLongIdle = false; //befindet sich jetzt nur in der normalen idle-Animation
@@ -53,7 +75,10 @@ class Character extends MovableObject{
     }
 
     //#region movement
-
+    /**
+     * Handles the character movement in response to keyboard input.
+     * Is being checked through an interval 60 times per second.
+     */
     movement = () => {
         this.charMoveRight();
         this.charMoveLeft();
@@ -84,6 +109,10 @@ class Character extends MovableObject{
 
     //#endregion
     //#region animations
+    /**
+     * Chooses and plays the intended animation based on the current character state.
+     * Checks by and interval 8 times per second.
+     */
     animation = () => {
         if (this.isDead()){ // dying animation
             this.charDying();
