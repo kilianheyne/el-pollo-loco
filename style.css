@@ -9,6 +9,10 @@
     text-decoration: none;
 }
 
+html {
+    overflow-x:
+}
+
 body{
     display: flex;
     flex-direction: column;

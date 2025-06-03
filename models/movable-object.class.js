@@ -104,7 +104,8 @@ class MovableObject extends DrawableObject {
     }
 
     hit(){
-        this.health -= 10; // this.movableObject.damage - Leben wird bei Kontakt reduziert
+        this.health -= 10;
+        
         if (this.health < 0){
             this.health = 0; // Leben kann nicht unter 0 fallen (negative Werte könnten die Death-Animation unterbinden)
         } else {

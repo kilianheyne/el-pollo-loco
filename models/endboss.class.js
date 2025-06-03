@@ -4,14 +4,6 @@ class Endboss extends MovableObject {
     y = 110;
     width = 300; 
     height = 340;
-    
-    health = 5;
-    speed = 20;
-
-    isDead = false; // flag for health bar
-    playedDeathAnimation = false;
-    hadFirstContact = false;
-    isDashing = false;
 
     offset = {
         top: 60,
@@ -19,6 +11,27 @@ class Endboss extends MovableObject {
         bottom: 20,
         left: 35
     };
+    
+    health = 5;
+    speed = 10;
+
+    isDead = false; // flag for health bar
+    playedDeathAnimation = false;
+
+    //#region relevant attributes for dash-methode
+
+    isDashing = false;
+    lastDash = 0;
+
+    now = Date.now();
+    cooldown = 2000;
+    lastDash;
+    dashDistance = 150;
+    jumpHeight = 60;
+    ogY;
+    direction = this.x > this.world.character.x ? -1 : 1;
+
+    //#endregion
     //#endregion
     //#region constructor
     constructor(){
@@ -30,7 +43,7 @@ class Endboss extends MovableObject {
         this.loadImages(ImageHub.endboss.hurt);
         this.loadImages(ImageHub.endboss.dead);
 
-        IntervalHub.setStoppableInterval(this.animation, 1000/5);
+        IntervalHub.setStoppableInterval(this.animation, 1000/10);
 
         //this.endbossWalkInterval = IntervalHub.setStoppableInterval(this.animateWalk, 1000 / 5);
         //this.endbossIntroInterval = IntervalHub.setStoppableInterval(this.animateIntro, 1000 / 5);
@@ -43,14 +56,13 @@ class Endboss extends MovableObject {
         if (!this.world || !this.world.character) return; // verhindert Error-Meldungen, dass character nicht existiert...
         this.getRealFrame();
         let range = Math.abs(this.world.character.x - this.x);
-        console.log('Current bosshealth ' + this.health);
 
         if (this.isHurt()){
             this.playAnimation(ImageHub.endboss.hurt);
         } else if (range <= 200){
             this.playAnimation(ImageHub.endboss.attack);
             this.dash();
-        } else if (range <= 500){
+        } else if (range <= 500 && this.x > this.world.character.x + 100){
             this.playAnimation(ImageHub.endboss.walk);
             this.x -= this.speed;
         } else {
@@ -59,16 +71,23 @@ class Endboss extends MovableObject {
     }
 
     dash(){
-        if (!this.isDashing){
-            this.x -= 50;
-            this.y -= 30;
-            this.isDashing = true;
-        }
+        if (this.isDashing || now - this.lastDash < cooldown || !this.world || !this.world.character) return;
+
+        this.lastDash = now;
+        this.isDashing = true;
+        ogY = this.y;
+
+        this.x += direction * dashDistance;
+        this.y -= jumpHeight;
 
         setTimeout(() => {
-            this.y += 30;
+            this.x -= direction * dashDistance * 0.6;
+            this.y = ogY;
         }, 300);
-        this.isDashing = false;
+
+        setTimeout(() => {
+            this.isDashing = false;
+        }, 600);
     }
 
     gotHit(){

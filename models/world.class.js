@@ -17,7 +17,7 @@ class World {
         boss: new BossHealthBar()
     };
     collectedCoins = [];
-    collectedBottles = [new ThrowableObject(), new ThrowableObject(), new ThrowableObject(), new ThrowableObject()];
+    collectedBottles = [];
     throwableObjects = [];
     //#endregion
     //#region constructor
@@ -97,8 +97,8 @@ class World {
         if(movableObject.otherDirection){
             this.flipImageBack(movableObject);
         }
-        movableObject.drawFrame(this.ctx);
-        movableObject.drawSecondFrame(this.ctx);
+        // movableObject.drawFrame(this.ctx);
+        // movableObject.drawSecondFrame(this.ctx);
     }
 
     flipImage(movableObject){
@@ -153,26 +153,14 @@ class World {
     }
 
     //#region checkCollisions
-
     checkChickenCollision(){
         for (let i = 0; i < this.level.enemies.length; i++){
             let enemy = this.level.enemies[i];
             if (this.character.isColliding(enemy)){
-                // if (this.character.isColliding(enemy) && this.character.speedY < 0){
-                //  this.character.y + this.character.height <= enemy.y + 10
-                // this.character.isColliding(enemy) && this.character.rY + this.character.rHeight <= enemy.rY + 25
                 if (this.character.speedY < 0){
-                    AudioHub.playSound(AudioHub.chickenHurt);
-                    //console.log('Hit on Chicken' + `& ${this.character.rY} & ${this.character.rHeight} & ${enemy.rY}`);
-                    console.log('chicken hurt' + this.character.speedY);
-                    enemy.hitOnChicken();
-                    this.character.jump();
+                    this.chickenAction(enemy);
                 } else if (!this.character.isHurt()){ // verhindert mehrere Treffer in einem kurzem Zeitraum
-                    AudioHub.playSound(AudioHub.charHurt);
-                    //console.log('Hit on Character' + `& CharY = ${this.character.y} & CharHeight = ${this.character.height} & EnemyY = ${enemy.y}`);
-                    console.log('character hurt' + this.character.speedY);
-                    this.character.hit(); 
-                    this.statusbar.health.setHealth(this.character.health);
+                    this.characterAction();
                 }
             }
         }
@@ -210,23 +198,39 @@ class World {
                 this.throwableObjects.splice(i, 1);
                 i--;
             } else {
-                for (let j = 0; j < this.level.enemies.length; j++){
-                    let enemy = this.level.enemies[j];
-                    if (bottle.isColliding(enemy) && !bottle.enemyHitted){
-                        bottle.enemyHitted = true;
-                        if (enemy instanceof Endboss){
-                            enemy.gotHit();
-                            this.statusbar.boss.setHealth(this.endboss.health)
-                        } else {
-                            enemy.hitOnChicken();
-                        }
-                        bottle.splash();
-                    }
-                }
+                this.bottleHit(bottle);
             }
         }
     }
+    //#endregion
+    //#region helper-methods for collision
+    chickenAction(enemy){
+        AudioHub.playSound(AudioHub.chickenHurt);
+        enemy.hitOnChicken();
+        this.character.jump();
+    }
 
+    characterAction(){
+        AudioHub.playSound(AudioHub.charHurt);
+        this.character.hit(); 
+        this.statusbar.health.setHealth(this.character.health);
+    }
+
+    bottleHit(bottle){
+        for (let j = 0; j < this.level.enemies.length; j++){
+            let enemy = this.level.enemies[j];
+            if (bottle.isColliding(enemy) && !bottle.enemyHitted){
+                bottle.enemyHitted = true;
+                if (enemy instanceof Endboss){
+                    enemy.gotHit();
+                    this.statusbar.boss.setHealth(this.endboss.health)
+                } else {
+                    enemy.hitOnChicken();
+                }
+                bottle.splash();
+            }
+        }
+    }
     //#endregion
 
     checkThrow(){
