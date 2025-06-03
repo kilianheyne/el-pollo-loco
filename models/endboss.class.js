@@ -23,14 +23,6 @@ class Endboss extends MovableObject {
     isDashing = false;
     lastDash = 0;
 
-    now = Date.now();
-    cooldown = 2000;
-    lastDash;
-    dashDistance = 150;
-    jumpHeight = 60;
-    ogY;
-    direction = this.x > this.world.character.x ? -1 : 1;
-
     //#endregion
     //#endregion
     //#region constructor
@@ -71,11 +63,20 @@ class Endboss extends MovableObject {
     }
 
     dash(){
-        if (this.isDashing || now - this.lastDash < cooldown || !this.world || !this.world.character) return;
+        const now = Date.now();
+        const cooldown = 2000;
 
-        this.lastDash = now;
+        if (this.isDashing || this.now - this.lastDash < this.cooldown || !this.world || !this.world.character) return;
+
         this.isDashing = true;
-        ogY = this.y;
+        this.lastDash = now;
+
+        const dashDistance = 200;
+        const jumpHeight = 60;
+
+        const ogX = this.x;
+        const ogY = this.y; 
+        const direction = this.x > this.world.character.x ? -1 : 1;
 
         this.x += direction * dashDistance;
         this.y -= jumpHeight;

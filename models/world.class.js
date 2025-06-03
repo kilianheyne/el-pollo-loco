@@ -157,9 +157,9 @@ class World {
         for (let i = 0; i < this.level.enemies.length; i++){
             let enemy = this.level.enemies[i];
             if (this.character.isColliding(enemy)){
-                if (this.character.speedY < 0){
+                if (this.character.speedY < 0 && !enemy.isDead){
                     this.chickenAction(enemy);
-                } else if (!this.character.isHurt()){ // verhindert mehrere Treffer in einem kurzem Zeitraum
+                } else if (!this.character.isHurt() && !enemy.isDead){ // verhindert mehrere Treffer in einem kurzem Zeitraum
                     this.characterAction();
                 }
             }
@@ -205,6 +205,7 @@ class World {
     //#endregion
     //#region helper-methods for collision
     chickenAction(enemy){
+        enemy.isDead = true;
         AudioHub.playSound(AudioHub.chickenHurt);
         enemy.hitOnChicken();
         this.character.jump();

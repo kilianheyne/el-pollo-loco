@@ -13,6 +13,8 @@ class MiniChicken extends MovableObject{
         left: 0
     };
 
+    isDead = false;
+
     // #endregion
     // #region constructor
     constructor(){
