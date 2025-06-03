@@ -55,10 +55,11 @@ class World {
         this.drawUI();
         this.ctx.translate(this.camera_x, 0);
         this.ctx.translate(-this.camera_x, 0);
-        let self = this;
-        requestAnimationFrame(function() { //requestAnimationFrame benötigt eine (anonyme) Funktion, Ausführung erfolgt, sobald alles oberhalb abgeschlossen ist (async?)
-            self.draw(); //this ist für die Funktion nicht mehr bekannt, deshalb Zuweisung mit self = this
-        });
+        requestAnimationFrame(() => this.draw())
+        // let self = this;
+        // requestAnimationFrame(function() { //requestAnimationFrame benötigt eine (anonyme) Funktion, Ausführung erfolgt, sobald alles oberhalb abgeschlossen ist (async?)
+        //     self.draw(); //this ist für die Funktion nicht mehr bekannt, deshalb Zuweisung mit self = this
+        // });
     }
 
     drawBackground(){

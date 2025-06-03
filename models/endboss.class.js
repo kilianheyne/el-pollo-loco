@@ -62,34 +62,52 @@ class Endboss extends MovableObject {
         }
     }
 
+    //#region dash-methods
+
     dash(){
         const now = Date.now();
+        if (this.canDash(now)){
+            this.startDash();
+        }
+    }
+
+    canDash(now){
         const cooldown = 2000;
+        return !this.isDashing &&
+                (!this.lastDash || now - this.lastDash >= cooldown) &&
+                this.world && this.world.character;
+    }
 
-        if (this.isDashing || this.now - this.lastDash < this.cooldown || !this.world || !this.world.character) return;
-
+    startDash(){
         this.isDashing = true;
-        this.lastDash = now;
+        this.lastDash = Date.now();
 
         const dashDistance = 200;
         const jumpHeight = 60;
-
-        const ogX = this.x;
         const ogY = this.y; 
         const direction = this.x > this.world.character.x ? -1 : 1;
 
+        this.dashForward(direction, dashDistance, jumpHeight);
+
+        setTimeout(() => this.dashBack(direction, dashDistance, ogY), 300);
+        setTimeoutt(() => this.endDash(), 600)
+    }
+
+    dashForward(direction, dashDistance, jumpHeight){
         this.x += direction * dashDistance;
         this.y -= jumpHeight;
-
-        setTimeout(() => {
-            this.x -= direction * dashDistance * 0.6;
-            this.y = ogY;
-        }, 300);
-
-        setTimeout(() => {
-            this.isDashing = false;
-        }, 600);
     }
+
+    dashBack(direction, dashDistance, ogY){
+        this.x -= direction * dashDistance * 0.6;
+        this.y = ogY;
+    }
+
+    endDash(){
+        this.isDashing = false;
+    }
+
+    //#endregion
 
     gotHit(){
         if (!this.isDead){
