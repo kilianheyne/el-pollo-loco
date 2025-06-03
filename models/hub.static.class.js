@@ -230,6 +230,7 @@ class AudioHub {
         AudioHub.charDying,
         AudioHub.chickenHurt,
         AudioHub.throwBottle,
+        AudioHub.coin,
     ];
 
     // abspielen von einem Sound
@@ -237,6 +238,7 @@ class AudioHub {
         sound.volume = 0.2;
         sound.currentTime = 0;
         sound.play();
+        //AudioHub.allSounds.push(sound)? - dann müsste man die ganzen Sounds nicht mehr händisch eintragen
     }
     
     // Abspielen stoppen

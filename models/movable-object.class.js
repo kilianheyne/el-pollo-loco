@@ -74,6 +74,8 @@ class MovableObject extends DrawableObject {
             this.loadImage(ImageHub.chicken.dead);
         } else if (this instanceof MiniChicken){
             this.loadImage(ImageHub.smallChicken.dead);
+        } else {
+            return; //prevents error messages jumping on th endboss
         }
         this.stopChicken();
         this.markedForDeletion = true; // Flag, zum Entfernen des Sprites vom Canvas

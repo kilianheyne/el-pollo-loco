@@ -1,14 +1,17 @@
 class Endboss extends MovableObject {
-    // #region attributes
+    //#region attributes
     x = 2600;
     y = 110;
     width = 300; 
     height = 340;
     
-    health = 5; 
+    health = 5;
+    speed = 20;
+
     isDead = false; // flag for health bar
     playedDeathAnimation = false;
     hadFirstContact = false;
+    isDashing = false;
 
     offset = {
         top: 60,
@@ -16,8 +19,8 @@ class Endboss extends MovableObject {
         bottom: 20,
         left: 35
     };
-    // #endregion
-    // #region constructor
+    //#endregion
+    //#region constructor
     constructor(){
         super();
         this.loadImage(ImageHub.endboss.walk[0]);
@@ -27,32 +30,46 @@ class Endboss extends MovableObject {
         this.loadImages(ImageHub.endboss.hurt);
         this.loadImages(ImageHub.endboss.dead);
 
-        this.endbossWalkInterval = IntervalHub.setStoppableInterval(this.animateWalk, 1000 / 5);
+        IntervalHub.setStoppableInterval(this.animation, 1000/5);
+
+        //this.endbossWalkInterval = IntervalHub.setStoppableInterval(this.animateWalk, 1000 / 5);
         //this.endbossIntroInterval = IntervalHub.setStoppableInterval(this.animateIntro, 1000 / 5);
     }
-    // #endregion
-    // #region methods
+    //#endregion
+    //#region methods
+    //#region animations
 
-    animateWalk = () =>  {
-        if (!this.isDead){
-            this.playAnimation(ImageHub.endboss.walk)
-        }
+    animation = () => {
+        if (!this.world || !this.world.character) return; // verhindert Error-Meldungen, dass character nicht existiert...
         this.getRealFrame();
+        let range = Math.abs(this.world.character.x - this.x);
+        console.log('Current bosshealth ' + this.health);
+
+        if (this.isHurt()){
+            this.playAnimation(ImageHub.endboss.hurt);
+        } else if (range <= 200){
+            this.playAnimation(ImageHub.endboss.attack);
+            this.dash();
+        } else if (range <= 500){
+            this.playAnimation(ImageHub.endboss.walk);
+            this.x -= this.speed;
+        } else {
+            this.playAnimation(ImageHub.endboss.alert);
+        }
     }
 
-    // animateIntro = () => {
-    //     let i = 0;
-    //     if (i < ImageHub.endboss.walk.length){
-    //         this.playAnimation(ImageHub.endboss.walk);
-    //     } else {
-    //         this.playAnimation(ImageHub.endboss.alert);
-    //     }
-    //     i++;
-    //     if (this.world.character.x > 2200 && !this.hadFirstContact){
-    //         i = 0;
-    //         hadFirstContact = true;
-    //     }
-    // }
+    dash(){
+        if (!this.isDashing){
+            this.x -= 50;
+            this.y -= 30;
+            this.isDashing = true;
+        }
+
+        setTimeout(() => {
+            this.y += 30;
+        }, 300);
+        this.isDashing = false;
+    }
 
     gotHit(){
         if (!this.isDead){
@@ -70,7 +87,7 @@ class Endboss extends MovableObject {
     }
 
     stopEndbossInterval(){
-        IntervalHub.stopInterval(endbossWalkInterval);
+        clearInterval(endbossWalkInterval);
     }
     // #endregion
 }
