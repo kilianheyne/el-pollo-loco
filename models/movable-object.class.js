@@ -21,7 +21,7 @@ class MovableObject extends DrawableObject {
     constructor(){
         super();
         this.deletionInterval = IntervalHub.setStoppableInterval(this.deletionCountdown, 1000/30);
-        this.gravityInterval = IntervalHub.setStoppableInterval(this.applyGravity, 1000/60)
+        this.gravityInterval = IntervalHub.setStoppableInterval(this.applyGravity, 1000/60);
         //
     }
     // #region methods
@@ -60,7 +60,10 @@ class MovableObject extends DrawableObject {
     }
 
     applyGravity = () => {
-        if (this.isAboveGround() || this.speedY > 0){
+        if (this.speedY > 0){
+            this.y -= this.speedY;
+            this.speedY -= this.acceleration;
+        } else if (this.isAboveGround()){
             this.y -= this.speedY;
             this.speedY -= this.acceleration;
         } else {

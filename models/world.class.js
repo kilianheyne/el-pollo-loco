@@ -1,3 +1,9 @@
+/**
+ * Represents the game world that manages basically everything.
+ * Manages rendering of all elements, handles collisions, character movement, enemy logic, tracking of collectables as well as winning and loosing conditions. 
+ * Links together all objects.
+ * @class
+ */
 class World {
     //#region attributes
     character = new Character();
@@ -6,6 +12,10 @@ class World {
     ctx;
     keyboard;
     collectable;
+
+    /**
+     * camera offset for side-scrolling
+     */
     camera_x = 0;
 
     canThrow = true; //Flasche kann nur einmal pro Tastendruck geworfen werden
@@ -21,6 +31,12 @@ class World {
     throwableObjects = [];
     //#endregion
     //#region constructor
+    /**
+     * Initializes the world which is set on a canvas and controlled by keyboard/button inputs.
+     * Initializes game loops and links all the interacting objects to the world.
+     * @param {dingens} canvas - element to render on
+     * @param {bummens} keyboard - input state of different keyboard buttons
+     */
     constructor(canvas, keyboard){
         this.ctx = canvas.getContext('2d'); //setzt den Zeichen-Bereich auf 2D 
         this.canvas = canvas;
@@ -44,6 +60,10 @@ class World {
     //#endregion
     //#region methods
     //#region drawing
+    /**
+     * Fundamental method to draw onto the canvas. 
+     * Clears and draws in a set loop which calls on itself.
+     */
     draw(){ // zeichnet alles auf unser Canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); //löscht erstmal alle vorhandenen Inhalte auf dem Canvas
         this.ctx.translate(this.camera_x, 0); // 
@@ -130,7 +150,9 @@ class World {
     setWorld(){
         this.character.world = this; //
     }
-    
+    /**
+     * Game loop logic to check all interactions.
+     */
     run = () => {
         this.checkCoinCollision();
         this.checkSalsaCollision();

@@ -1,0 +1,30 @@
+{
+    "source": {
+        "include": [
+            "./models/background.object.class.js",
+            "./models/bossbar.class.js",
+            "./models/bottlebar.class.js",
+            "./models/character.class.js",
+            "./models/chicken.class.js",
+            "./models/clouds.class.js",
+            "./models/coin.class.js",
+            "./models/coinbar.class.js",
+            "./models/collectable.class.js",
+            "./models/drawable-object.class.js",
+            "./models/endboss.class.js",
+            "./models/healthbar.class.js",
+            "./models/hub.static.class.js",
+            "./models/keyboard.class.js",
+            "./models/level.class.js",
+            "./models/mini-chicken.class.js",
+            "./models/movable-object.class.js",
+            "./models/salsabottle.class.js",
+            "./models/statusbar.class.js",
+            "./models/throwable-object.class.js",
+            "./models/world.class.js"
+        ]
+    },
+    "opts": {
+        "destination": "./out"
+    } 
+}
