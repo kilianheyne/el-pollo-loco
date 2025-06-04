@@ -9,8 +9,8 @@ class BossHealthBar extends Statusbar {
      */
     percentage = 5;
 
-    x = 200;
-    y = 54;
+    x = 212;
+    y = 4;
     width = 350;
     height =70;
 

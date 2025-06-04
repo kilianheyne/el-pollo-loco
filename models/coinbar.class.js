@@ -3,7 +3,8 @@
  * @class
  */
 class CoinBar extends Statusbar {
-    x = 250;
+    
+    y = 34;
 
     /**
      * Creates the coin bar and lads the relevant images from the hub.class.

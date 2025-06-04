@@ -4,7 +4,7 @@
  */
 class BottleBar extends Statusbar {
 
-    x = 480;
+    y = 64;
 
     /**
      * Initializes the bottle bar and loads the bottle status images.

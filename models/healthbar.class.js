@@ -6,7 +6,6 @@ class HealthBar extends Statusbar {
     // #region attributes 
     percentage = 100;
 
-    x = 20;
     // #endregion
     // #region constructor
     /**
