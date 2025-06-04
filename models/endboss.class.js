@@ -1,3 +1,7 @@
+/**
+ * Shows the endboss of the game with animations, attackpatterns and health management. 
+ * @class
+ */
 class Endboss extends MovableObject {
     //#region attributes
     x = 2600;
@@ -5,6 +9,9 @@ class Endboss extends MovableObject {
     width = 300; 
     height = 340;
 
+    /**
+     * Numbers to correct the hitbox of the endboss.
+     */
     offset = {
         top: 60,
         right: 40,
@@ -26,6 +33,9 @@ class Endboss extends MovableObject {
     //#endregion
     //#endregion
     //#region constructor
+    /**
+     * Creates an instance of the Endboss and loads all required images for animations. 
+     */
     constructor(){
         super();
         this.loadImage(ImageHub.endboss.walk[0]);
@@ -44,6 +54,9 @@ class Endboss extends MovableObject {
     //#region methods
     //#region animations
 
+    /**
+     * Determines which animation should play depending on the distance of the playable character.
+     */
     animation = () => {
         if (!this.world || !this.world.character) return; // verhindert Error-Meldungen, dass character nicht existiert...
         this.getRealFrame();
@@ -64,6 +77,9 @@ class Endboss extends MovableObject {
 
     //#region dash-methods
 
+    /**
+     * Trigger a dash attack. 
+     */
     dash(){
         const now = Date.now();
         if (this.canDash(now)){
@@ -71,6 +87,11 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * Checks whether the dash cooldown has passed
+     * @param {number} now - current timestamp
+     * @returns {boolean} - if dash is allowed
+     */
     canDash(now){
         const cooldown = 2000;
         return !this.isDashing &&
@@ -78,6 +99,9 @@ class Endboss extends MovableObject {
                 this.world && this.world.character;
     }
 
+    /**
+     * Execution of dash -> forward + jump + back
+     */
     startDash(){
         this.isDashing = true;
         this.lastDash = Date.now();
@@ -90,25 +114,43 @@ class Endboss extends MovableObject {
         this.dashForward(direction, dashDistance, jumpHeight);
 
         setTimeout(() => this.dashBack(direction, dashDistance, ogY), 300);
-        setTimeoutt(() => this.endDash(), 600)
+        setTimeout(() => this.endDash(), 600)
     }
 
+    /**
+     * Moves the Endboos forward and lets him slightly jump.
+     * @param {number} direction - 1 for right, -1 for left
+     * @param {number} dashDistance 
+     * @param {number} jumpHeight 
+     */
     dashForward(direction, dashDistance, jumpHeight){
         this.x += direction * dashDistance;
         this.y -= jumpHeight;
     }
 
+    /**
+     * Moves the Endboss back slightly to create a sort of jump/bounce off of the playable character.
+     * @param {number} direction - 1 for right, -1 for left
+     * @param {number} dashDistance 
+     * @param {number} ogY - the former y-position of the endboss before the dash.
+     */
     dashBack(direction, dashDistance, ogY){
         this.x -= direction * dashDistance * 0.6;
         this.y = ogY;
     }
 
+    /**
+     * Ends dash and resets flag.
+     */
     endDash(){
         this.isDashing = false;
     }
 
     //#endregion
 
+    /**
+     * Reduces health by 1 and triggers dead in case health reaches a value of 0 or below 0.
+     */
     gotHit(){
         if (!this.isDead){
             this.health--;
@@ -118,6 +160,9 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * Triggers death animation. 
+     */
     died(){
         this.isDead =  true;
         this.playAnimation(ImageHub.endboss.dead);

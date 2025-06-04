@@ -1,3 +1,7 @@
+/**
+ * Display the current health of the playable character.
+ * @class
+ */
 class HealthBar extends Statusbar {
     // #region attributes 
     percentage = 100;
@@ -5,6 +9,9 @@ class HealthBar extends Statusbar {
     x = 20;
     // #endregion
     // #region constructor
+    /**
+     * Creates a new helathbar instance and initializes its images.
+     */
     constructor (){
         super();
         this.loadImages(ImageHub.statusbar.health);
@@ -12,12 +19,20 @@ class HealthBar extends Statusbar {
     }
     // #endregion
     // #region methods
+    /**
+     * Sets the current health value and updates the displayed image.
+     * @param {number} percentage - health percentage between 0 and 100
+     */
     setHealth(percentage){
         this.percentage = percentage;
         let path = ImageHub.statusbar.health[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
+    /**
+     * Determines the correct image based on characters current health.
+     * @returns {number} - Index of the image that should be used.
+     */
     resolveImageIndex(){
         if (this.percentage == 100){
             return 0;

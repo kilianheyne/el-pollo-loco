@@ -1,3 +1,7 @@
+/**
+ * Represents an item that can be thrown to damage the endboss.
+ * @class
+ */
 class ThrowableObject extends MovableObject {
     // #region attributes
 
@@ -15,6 +19,12 @@ class ThrowableObject extends MovableObject {
     };
     // #endregion
     // #region constructor
+    /**
+     * Cretes a new throwable item at the current position of the playable character and the direction he is facing.
+     * @param {number} x - initial position from where the item should be thrown
+     * @param {number} y - initial position from where the item should be thrown
+     * @param {boolean} facingLeft - direction of throw
+     */
     constructor(x, y, facingLeft){
         super();
 

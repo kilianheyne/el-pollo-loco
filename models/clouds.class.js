@@ -1,3 +1,6 @@
+/**
+ * Creates a cloud as a little detail in the background. Slowly moves to the left.
+ */
 class Cloud extends DrawableObject{
     // #region attributes
     x = Math.random() * 500; // zufällige Positionierung auf der x-Koordinate
@@ -8,6 +11,9 @@ class Cloud extends DrawableObject{
     
     // #endregion
     // #region constructor
+    /**
+     * Creates a cloud and starts its movement.
+     */
     constructor(){
         super();
         this.loadImage('img/5_background/layers/4_clouds/full.png') //fügt das Bild auf dem Canvas ein

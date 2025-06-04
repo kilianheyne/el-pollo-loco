@@ -1,3 +1,7 @@
+/**
+ * Represents all movable entities in the game such as character and enemies.
+ * @class
+ */
 class MovableObject extends DrawableObject {
     // #region attributes
     speed = 0.06;
@@ -11,6 +15,9 @@ class MovableObject extends DrawableObject {
     deletionCounter = 30; // time delay until enemy vanishes from canvas
     // #endregion
 
+    /**
+     * Initializes intervals for gravity and deletion countdown on object.
+     */
     constructor(){
         super();
         this.deletionInterval = IntervalHub.setStoppableInterval(this.deletionCountdown, 1000/30);
@@ -25,7 +32,11 @@ class MovableObject extends DrawableObject {
     //         this.rX < movableObject.rX &&
     //         this.rY < movableObject.rY + movableObject.rHeight
     // }
-
+    /**
+     * Checks of object is currently colliding with another object.
+     * @param {object} movableObject - object to check collision against
+     * @returns {boolean} - true if collision is happening
+     */
     isColliding(movableObject){
         return this.rX < movableObject.rX + movableObject.rWidth &&
                 this.rX + this.rWidth > movableObject.rX &&

@@ -1,3 +1,6 @@
+/**
+ * Creates a chick as an enemy. Similiar behaviour to the normal chickens - moving to the left.
+ */
 class MiniChicken extends MovableObject{
     // #region attributes
     x = 200 + Math.random() * 2000;
@@ -6,6 +9,9 @@ class MiniChicken extends MovableObject{
     height = 80;
     speed = 0.06 + Math.random() * 0.25;
 
+    /**
+     * Numbers to correct the hitbox of chicks.
+     */
     offset = {
         top: 0,
         right: 0,
@@ -17,6 +23,9 @@ class MiniChicken extends MovableObject{
 
     // #endregion
     // #region constructor
+    /**
+     * Creates a chick with a random startion position and speed. Images and movement is initialized.
+     */
     constructor(){
         super();
         this.loadImages(ImageHub.smallChicken.walk);

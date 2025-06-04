@@ -1,3 +1,8 @@
+/**
+ * Class as a visual base for the entire project. All drawable objects, such as characters, items and enemies are are handled here.
+ * It handles image loading, drawing and framing of hitboxes.
+ * @class
+ */
 class DrawableObject {
     // #region attributes
     x = 100;
@@ -5,6 +10,10 @@ class DrawableObject {
     width = 65;
     height = 150;
     img;
+
+    /**
+     * Stores multiple preloaded images used for a variety of animations.
+     */
     imageCache = {};
     currentImage = 0;
 
@@ -15,11 +24,19 @@ class DrawableObject {
 
     // #endregion
     // #region methods
+    /**
+     * Loads a signle image and assigne it to the object.
+     * @param {string} path - Path to the image file. 
+     */
     loadImage(path){
         this.img = new Image(); // entspricht einer Zusammenfassung von HTML & JS => HTML: <img id="image">; JS: const img = document.getElementById('image');
         this.img.src = path;
     }
 
+    /**
+     * Puts multiple images into the image cache & sets the first image as default.
+     * @param {string[]} arr - Array of image paths. 
+     */
     loadImages(arr){
         for(let i = 0; i < arr.length; i++){
             let img = new Image();
@@ -31,6 +48,10 @@ class DrawableObject {
         }
     }
 
+    /**
+     * Draws the object on the canvas.
+     * @param {dingens} ctx - Canvas context (2D). 
+     */
     draw(ctx){
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height); //MovableObject wird jetzt neu auf das Canvas gezeichnet
     }
@@ -55,6 +76,9 @@ class DrawableObject {
         }
     }
 
+    /**
+     * Calculates a refined hitbox to actually match the visual appearance in game.
+     */
     getRealFrame(){
         this.rX = this.x + this.offset.left;
         this.rY = this.y + this.offset.top;

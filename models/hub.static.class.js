@@ -1,3 +1,7 @@
+/**
+ * Central class for all image paths necessary for the game, such as animations, statusbars and events.
+ * @class
+ */
 class ImageHub {
     // #region playable character Pepe
     static pepe = {
@@ -188,6 +192,10 @@ class ImageHub {
     }
 }
 
+/**
+ * Central class for all intervals that are created during the game. Ideal to end all of them for a smooth transitions between game states.
+ * @class
+ */
 class IntervalHub {
 
     static everyInterval = [];
@@ -208,6 +216,10 @@ class IntervalHub {
     }
 }
 
+/**
+ * Central class for all sounds that are played during the game. Ideal to end all of them for a smooth transitions between game states.
+ * @class
+ */
 class AudioHub {
     // Audiodateien
     static backgroundMusic = new Audio('./audio/backgroundmusic.mp3');

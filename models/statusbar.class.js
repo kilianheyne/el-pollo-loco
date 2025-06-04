@@ -1,3 +1,7 @@
+/**
+ * General positioning of every statusbar shown in the game.
+ * @class
+ */
 class Statusbar extends DrawableObject {
 
     y = 4;
