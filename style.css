@@ -10,7 +10,7 @@
 }
 
 html {
-    overflow-x:
+    overflow-x: hidden;
 }
 
 body{
@@ -75,10 +75,13 @@ h1{
     background-repeat: no-repeat;
     border-radius: 11px;
 
+    @media only screen and (max-width: 1024px){
+        background-size: cover;
+    }
+
     @media only screen and (max-width: 932px){
         width: 100%;
         height: 100dvh;
-        background-size: cover;
     }
 
     #start-screen-buttons{
@@ -123,13 +126,30 @@ h1{
     }
     @media ((orientation: landscape) and (max-width: 1024px)){
         display: flex;
+        flex-direction: row;
         justify-content: space-between;
         position: absolute;
-        bottom: 12px;
+        bottom: 18px;
         z-index: 5;
         width: 100%;
         padding-left: 12px;
         padding-right: 12px;
+
+        .btn-style{
+            background: linear-gradient(to bottom, #f7b733, #fc4a1a);
+            color: #fff;
+            border: 4px solid #b04a1d;
+            border-radius: 11px;
+            box-shadow: 0 6px 0 #89240f, 0 8px 15px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.2s ease-in-out;
+            height: 30px;
+        }
+        .img-position{
+            display: flex;
+            align-items: center;
+        }
     }
 }
 
@@ -157,6 +177,13 @@ h1{
 .btn-style:active{
     transform: translateY(4px);
     box-shadow: 0 2px 0 #89240f;
+}
+
+#mute-btn{
+    position: absolute;
+    z-index: 15;
+    top: 12px;
+    right: 12px;
 }
 
 #volume{

@@ -39,6 +39,7 @@
     <script src="./models/throwable-object.class.js"></script>
 </head>
 <body onload="init()">
+
     <h1>EL POLLO LOCO</h1>
 
     <div id="tilt-screen">
@@ -46,15 +47,15 @@
     </div>
 
     <div id="center-container">
+        <div>
+            <button id="mute-btn" class="btn-style" onclick="AudioHub.toggleMute(), mouseClick()">🔈</button>
+        </div>
         <div id="start-screen">
             <div id="start-screen-buttons">
                 <div id="top-btn-bar">
                     <div>
                         <button id="controll-info" class="btn-style" onclick="mouseClick(), showControlls()">&#9432;</button>
-                        <button class="btn-style" onclick="mouseClick()">Impressum</button>
-                    </div>
-                    <div>
-                        <button class="btn-style" onclick="AudioHub.stopAll(), mouseClick()">&#x1f50a;</button>
+                        <button class="btn-style" onclick="mouseClick(), window.open('impressum.html', '_blank')">Impressum</button>
                     </div>
                 </div>
                 <div id="bottom-btn-bar">
@@ -83,19 +84,19 @@
             <button class="btn-style" onclick="restartGame()">PLAY AGAIN</button>
         </div>
         <div id="mobile-ui">
-            <div id="mobile-movement">
-                <button id="mo-ui-left" class="btn-style">
+            <div id="mobile-movement" class="img-position">
+                <button id="mo-ui-left" class="btn-style img-position">
                     <img src="./img/0_ui/left-ui.png" alt="left">
                 </button>
-                <button id="mo-ui-right" class="btn-style">
+                <button id="mo-ui-right" class="btn-style img-position">
                     <img src="./img/0_ui/right-ui.png" alt="right">
                 </button>
             </div>
-            <div id="mobile-action">
-                <button id="mo-ui-throw" class="btn-style">
+            <div id="mobile-action" class="img-position">
+                <button id="mo-ui-throw" class="btn-style img-position">
                     <img src="./img/0_ui/throw-bottle-ui.png" alt="throw">
                 </button>
-                <button id="mo-ui-jump" class="btn-style">
+                <button id="mo-ui-jump" class="btn-style img-position">
                     <img src="./img/0_ui/jump-ui.png" alt="jump">
                 </button>
             </div>

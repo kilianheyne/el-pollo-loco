@@ -273,4 +273,45 @@ class AudioHub {
             sound.volume = volumeValue;
         })
     }
+
+    static isMuted = JSON.parse(localStorage.getItem('isMuted')) || false;
+
+    static muteAll(){
+        AudioHub.allSounds.forEach(sound => sound.muted = true);
+        AudioHub.isMuted = true;
+        localStorage.setItem('isMuted', true);
+    }
+
+    static unmuteAll(){
+        AudioHub.allSounds.forEach(sound => sound.muted = false);
+        AudioHub.isMuted = false;
+        localStorage.setItem('isMuted', false);
+    }
+
+    static toggleMute(){
+        if (AudioHub.isMuted){
+            AudioHub.unmuteAll();
+        } else {
+            AudioHub.muteAll();
+        }
+        AudioHub.updateMuteBtn();
+    }
+
+    static updateMuteBtn(){
+        const btnRef = document.getElementById('mute-btn');
+        if (AudioHub.isMuted){
+            btnRef.innerHTML = '🔇';
+        } else {
+            btnRef.innerHTML = '🔈';
+        }
+    }
+
+    static setFromLocalStorage(){
+        if (AudioHub.isMuted){
+            AudioHub.muteAll();
+        } else {
+            AudioHub.unmuteAll();
+        }
+        AudioHub.updateMuteBtn();
+    }
 }

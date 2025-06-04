@@ -13,6 +13,7 @@ function init(){
     showStartScreen();
     hideWinScreen();
     hideLooseScreen();
+    AudioHub.setFromLocalStorage();
 }
 
 function showStartScreen(){
