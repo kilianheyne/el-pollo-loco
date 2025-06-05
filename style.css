@@ -33,6 +33,12 @@ body{
     display: none;
 }
 
+.justi-flex{
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
 h1{
     font-size: 48px;
     margin-bottom: 40px;
@@ -70,14 +76,10 @@ h1{
     width: 720px;
     height: 480px;
     background: url(img/9_intro_outro_screens/start/startscreen_2.png);
-    background-position: center;
-    background-size: contain;
+    background-position: right;
+    background-size: cover;
     background-repeat: no-repeat;
     border-radius: 11px;
-
-    @media only screen and (max-width: 1024px){
-        background-size: cover;
-    }
 
     @media only screen and (max-width: 932px){
         width: 100%;
@@ -214,6 +216,7 @@ h1{
     img{
         object-fit: contain;
         width: 100%;
+        margin-bottom: 12px;
     }
 }
 
@@ -231,6 +234,7 @@ h1{
     img{
         object-fit: contain;
         width: 100%;
+        margin-bottom: 12px;
     }
 }
 

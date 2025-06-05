@@ -48,6 +48,18 @@ function showStartScreen(){
     startScreen.style.zIndex = 10;
 }
 
+function showStartFromWin(){
+    initLevel();
+    showStartScreen();
+    hideWinScreen();
+}
+
+function showStartFromLoose(){
+    initLevel();
+    showStartScreen();
+    hideLooseScreen();
+}
+
 /**
  * Hides the start screen.
  */
@@ -67,7 +79,6 @@ function startGame(){
     hideStartScreen();
     world = new World(canvas, keyboard);
     AudioHub.playSound(AudioHub.backgroundMusic);
-    
 }
 
 /**
