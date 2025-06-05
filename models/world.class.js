@@ -259,7 +259,7 @@ class World {
 
     checkThrow(){
         if(this.keyboard.SHIFT && this.collectedBottles.length > 0 && this.canThrow){
-            let bottle = new ThrowableObject(this.character.x, this.character.y, this.character.otherDirection);
+            let bottle = new ThrowableObject(this.character.rX, this.character.rY, this.character.otherDirection);
             this.throwableObjects.push(bottle);
             this.collectedBottles.pop(); // entfernt eine Einheit aus dem Array
             this.statusbar.bottles.setBottleBar(); //Statusanzeige aktualisieren
